@@ -10,7 +10,7 @@ import Help from './pages/Help'
 import FAQ from './pages/FAQ'
 import Page404 from './pages/Page404'
 import Book from './pages/Book'
-
+import Contact from './pages/Contact';
 function App() {
   return (
     <div className="App">
@@ -23,6 +23,7 @@ function App() {
         <Route path='/user-profile' element={<Userprofile />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/help' element={<Help />} />
         <Route path='/faq' element={<FAQ />} />
         <Route path="*" element={<Page404/>} />
