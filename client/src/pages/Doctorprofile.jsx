@@ -1,6 +1,6 @@
 import React from 'react'
 import "../css/DoctorProfile.css";
-// import "../img/unknown.png" from unknownimg;
+import unknownimg from "../img/unknown.png";
 function DoctorProfile()
 {
     return(<div className="col-lg-8">
@@ -45,7 +45,7 @@ function DoctorData()
     return(<div className="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
     <div className="card border-0 shadow">
         <div className="profile-pic-div">
-            <img src="/img/unknown.png" id="photo" style={{maxWidth:'200px',maxHeight:'400px'}} alt="unknown" />
+            <img src={unknownimg} id="photo" style={{maxWidth:'200px',maxHeight:'400px'}} alt="unknown" />
         </div>
         <div className="card-body p-1-9 p-xl-5 nameAddress">
             <div className="mb-4">
