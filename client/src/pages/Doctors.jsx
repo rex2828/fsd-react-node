@@ -27,7 +27,8 @@ const Doctors = () => {
             doctors.sort((a, b) => a.fee - b.fee)
         }
         doctors = doctors.filter((doctor) => {
-            return doctor.name.toLowerCase().includes(search) || doctor.edu.toLowerCase().includes(search) || doctor.category.toLowerCase().includes(search);
+            let searchText = search.toLowerCase()
+            return doctor.name.toLowerCase().includes(searchText) || doctor.edu.toLowerCase().includes(searchText) || doctor.category.toLowerCase().includes(searchText);
         })
         setRenderedDoctors(doctors)
     }, [fetchedDoctors, location, sortBy, search])
