@@ -5,16 +5,10 @@ function OptionsContainer(props) {
     <div
       className={
         props.isSearchBox
-          ? props.isActiveOptions
-            ? props.className["options-container"] +
-              " " +
-              props.className["active"]
-            : props.className["options-container"]
-          : props.isActiveOptions
-          ? props.className["options-container-no-search"] +
-            " " +
-            props.className["active"]
-          : props.className["options-container-no-search"]
+          ? props.className["options-container"] +
+            (props.isActiveOptions ? " " + props.className["active"] : "")
+          : props.className["options-container-no-search"] +
+            (props.isActiveOptions ? " " + props.className["active"] : "")
       }
     >
       {props.options.length > 0 && props.options[0].id !== "" ? (

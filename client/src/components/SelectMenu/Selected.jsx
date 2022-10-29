@@ -4,13 +4,14 @@ const Selected = forwardRef((props, ref) => {
   return (
     <div
       className={
-        props.setSpan !== undefined &&
+        props.className["selected"] +
+        (props.setSpan !== undefined &&
         props.required !== undefined &&
         props.required &&
         props.setSpan &&
         props.selectedOption === props.placeholder
-          ? props.className["selected"] + " " + props.className["error"]
-          : props.className["selected"]
+          ? " " + props.className["error"]
+          : "")
       }
       onClick={props.onClick}
       ref={ref.selectDivRef}
