@@ -1,6 +1,6 @@
 import React from "react";
 import "react-bootstrap";
-import imgSrc from '../img/contact.jpg';
+import imgSrc from '../img/contactSvg.svg';
 import {useState} from 'react';
 function Contact() {
 	const [contactForm, setContactForm]  = useState({
@@ -38,7 +38,7 @@ function Contact() {
 					/>
 				</div>
 				</div>
-				<div className="col-lg-6">
+				<div className="col-lg-6" style={{width:'40%'}}>
 				<div className="contact-box ml-3">
 					<h1 className="font-weight-light mt-2">Quick Contact</h1>
 					<form onSubmit={handleSubmit} className="mt-4">
