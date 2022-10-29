@@ -1,64 +1,19 @@
 import React from "react";
-import { useState } from "react";
 import "react-bootstrap";
-import style from "../css/Contact.module.css";
-// import axios from "axios";
-function sendEmail()
-{
-    
-}
-function Form()
-{
-    const [contactForm, setContactForm]  = useState({
-        username:"",
-        email:"",
-        phone:"",
-        message:""
-    });
-    const [validateForm, setValidateForm] = useState(true);
-    function validateInput(data)
-    {
-        // console.table(data.username.length);
-        if(data.username.length<3)
-        {
-            window.alert("Please Enter Valid Name!");
-            return false;
-        }
-        let emailValid = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i;
-        if(!data.email.match(emailValid))
-        {
-            window.alert("Please Enter an valid Email id!");
-            return false;
-        }
-        let phoneno = /^\d{10}$/;
-        if(!data.phone.match(phoneno))
-        {
-            window.alert("Please Enter an valid Telephone no.")
-            return false;
-        }
-        if(data.message.length<10)
-        {
-            window.alert("Message too short!");
-            return false;
-        }
-        return true;
-    }
-    // function postData()
-    // {
-    //     axios.post("/api/contact")
-    //     .then((contactFor)=>{
-
-    //     })
-    //     .catch(()=>
-    //     {
-    //         console.log("Error occured!");
-    //     })
-    // }
+import imgSrc from '../img/contact.jpg';
+import {useState} from 'react';
+function Contact() {
+	const [contactForm, setContactForm]  = useState({
+		username:"",
+		email:"",
+		phone:"",
+		message:""
+	});
     function handleInput(event)
     {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(event.target.value);
+        // console.log(event.target.value);
         // validateInput(name,value);
         setContactForm({...contactForm,[name]:value});
     }
@@ -66,33 +21,88 @@ function Form()
     {
         event.preventDefault();
         const contactData ={...contactForm};
-        // console.log(contactData);
-        setValidateForm(validateInput(contactData));
-        console.log(validateForm);
-        if(validateForm===true)
-        {
-            setContactForm({...contactForm, contactData});
-            setContactForm({username:"",email:"",phone:"",message:""});
-        }
-        // console.table(contactData);
+		setContactForm({...contactForm, contactData});
+		setContactForm({username:"",email:"",phone:"",message:""});
+        console.table(contactData);
     }
-    return(<form action="/contact" onSubmit={sendEmail} className={`form-group ${style.contactForm}`}>
-        <h3>CONTACT US</h3>
-        <input type="text" id="name" name="username" value={contactForm.username} onChange={handleInput} placeholder="Your Name..." required />
-        <input type="email" id="email" name="email" value={contactForm.email} onChange={handleInput} placeholder="Your email id..." required />
-        <input type="tel" id="phone" name="phone" value={contactForm.phone} onChange={handleInput} placeholder="Your phone no..." required />
-        <textarea id="message" rows="4" name="message" value={contactForm.message} onChange={handleInput} placeholder="How can we help you...." required></textarea>
-        <button type="submit" id="btn" onClick={handleSubmit}>Submit</button>
-    </form>
-    )
+	return (
+		<div className="contact3 py-5">
+		<div className="row no-gutters">
+			<div className="container">
+			<div className="row">
+				<div className="col-lg-6">
+				<div className="card-shadow">
+					<img
+					src={imgSrc}
+					className="img-fluid" alt='img loading...'
+					/>
+				</div>
+				</div>
+				<div className="col-lg-6">
+				<div className="contact-box ml-3">
+					<h1 className="font-weight-light mt-2">Quick Contact</h1>
+					<form onSubmit={handleSubmit} className="mt-4">
+					<div className="row">
+						<div className="col-lg-12">
+						<div className="form-group mt-2">
+							<input
+							className="form-control"
+							type="text"
+							required
+							placeholder="Name" name="username" value={contactForm.username} onChange={handleInput}
+							/>
+						</div>
+						</div>
+						<div className="col-lg-12">
+						<div className="form-group mt-2">
+							<input
+							className="form-control"
+							type="email"
+							name="email"
+							required
+							placeholder="Email" onChange={handleInput} value={contactForm.email}
+							/>
+						</div>
+						</div>
+						<div className="col-lg-12">
+						<div className="form-group mt-2">
+							<input
+							className="form-control"
+							type="tel"
+							name="phone"
+							required
+							placeholder="phone" onChange={handleInput} value={contactForm.phone}
+							/>
+						</div>
+						</div>
+						<div className="col-lg-12">
+						<div className="form-group mt-2">
+							<textarea
+							className="form-control"
+							rows="3"
+							name="message"
+							required ='required'
+							placeholder="message" onChange={handleInput} value={contactForm.message}
+							></textarea>
+						</div>
+						</div>
+						<div className="col-lg-12">
+						<button
+							type="submit"
+							className="btn btn-danger-gradiant mt-3 text-white border-0 px-3 py-2 btn-secondary"
+						>
+							{/* Submit */}
+							<span>SUBMIT</span>
+						</button>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+			</div>
+        </div>
+      </div>
+    </div>
+  );
 }
-function ContactTitle()
-{
-    return(<div className={style.contactusContainer}>
-        <Form />
-</div>)
-}
-const Contact =()=> {
-    return(<ContactTitle />)
-};
 export default Contact;
