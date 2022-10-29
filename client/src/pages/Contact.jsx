@@ -40,7 +40,7 @@ function Contact() {
 				</div>
 				<div className="col-lg-6" style={{width:'40%'}}>
 				<div className="contact-box ml-3">
-					<h1 className="font-weight-light mt-2">Quick Contact</h1>
+					<h1 className="font-weight-light mt-2" style={{textAlign:'center'}}>Quick Contact</h1>
 					<form onSubmit={handleSubmit} className="mt-4">
 					<div className="row">
 						<div className="col-lg-12">
@@ -87,7 +87,7 @@ function Contact() {
 						</div>
 						</div>
 						<div className="col-lg-12">
-						<button
+						<button style={{marginLeft:'40%'}}
 							type="submit"
 							className="btn btn-danger-gradiant mt-3 text-white border-0 px-3 py-2 btn-secondary"
 						>
