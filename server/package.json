@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
+    "nodemon": "^2.0.20"
+=======
     "axios": "^1.1.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -25,5 +28,6 @@
     "stripe": "^10.15.0",
     "uuid": "^9.0.0",
     "validator": "^13.7.0"
+>>>>>>> 53947f42b39e849f67475c3351b171ba3a7ee329
   }
 }
