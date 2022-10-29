@@ -502,7 +502,7 @@ function Book() {
   }
 
   return (
-    <div className={styles["app"]}>
+    <div className={styles["book-appointment"]}>
       <div className={styles["appointment-form"]}>
         <h1 className={styles["title"]}>Appointment Form</h1>
         <form onSubmit={submitHandler} className={styles["form"]}>
