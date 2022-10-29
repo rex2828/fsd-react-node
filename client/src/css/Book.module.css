@@ -33,10 +33,6 @@
   margin-bottom: 20px;
 }
 
-.appointment-form .form {
-  /* max-width: 100%; */
-}
-
 .appointment-form .form .info {
   display: flex;
 }

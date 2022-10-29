@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-// import InputMap from "./Components/InputMap";
-// import Button from "./Components/Button";
-import InputMap from "../components/BookAppointment/InputMap";
-import Button from "../components/BookAppointment/Button";
-import styles from "../css/BookAppointment.module.css";
+import InputMap from "../components/Book/InputMap";
+import Button from "../components/Book/Button";
+import styles from "../css/Book.module.css";
 
 function Book() {
   const [patientInfoInputs, setPatientInfoInputs] = useState([
@@ -51,7 +49,7 @@ function Book() {
     {
       id: "patientAge",
       name: "patientAge",
-      type: "text",
+      type: "number",
       errorMessage: "Age is required",
       placeholder: "Age",
       label: "Patient's Age",
@@ -395,7 +393,6 @@ function Book() {
   }
 
   function onChange(event) {
-    // console.log(event.target.value);
     sePatientInfoValues((prevState) => {
       return { ...prevState, [event.target.name]: event.target.value };
     });
@@ -427,6 +424,8 @@ function Book() {
       if (
         key !== "patientMobileNo" &&
         key !== "appointmentReason" &&
+        key !== "appointmentDate" &&
+        key !== "appointmentTime" &&
         value.toString().trim().length === 0
       ) {
         isEmptyPatient = true;
