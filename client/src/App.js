@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
@@ -11,6 +11,7 @@ import FAQ from './pages/FAQ'
 import Page404 from './pages/Page404'
 import Book from './pages/Book'
 import Contact from './pages/Contact';
+import Doctor from './pages/Doctors'
 function App() {
   return (
     <div className="App">
@@ -18,9 +19,10 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/' element={<Book />} />
+        <Route path='/book' element={<Book />} />
         <Route path='/doctor-profile' element={<Doctorprofile />} />
         <Route path='/user-profile' element={<Userprofile />} />
+        <Route path='/doctors' element={<Doctor/>} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />

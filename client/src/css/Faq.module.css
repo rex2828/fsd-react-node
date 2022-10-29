@@ -8,7 +8,13 @@ body{
   {
     background-color:#B4ECE3;
   }
-  
+  .container
+  {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding-top: 2rem;
+  }
   /* Navbar */
   .home_menu {
     position: absolute;

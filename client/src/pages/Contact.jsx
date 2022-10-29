@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import "../css/Contact.css";
+import "react-bootstrap";
+import style from "../css/Contact.module.css";
 // import axios from "axios";
 function sendEmail()
 {
@@ -73,20 +74,21 @@ function Form()
             setContactForm({...contactForm, contactData});
             setContactForm({username:"",email:"",phone:"",message:""});
         }
-        console.table(contactData);
+        // console.table(contactData);
     }
-    return(<form action="/contact" onSubmit={sendEmail}>
+    return(<form action="/contact" onSubmit={sendEmail} className={`form-group ${style.contactForm}`}>
         <h3>CONTACT US</h3>
         <input type="text" id="name" name="username" value={contactForm.username} onChange={handleInput} placeholder="Your Name..." required />
         <input type="email" id="email" name="email" value={contactForm.email} onChange={handleInput} placeholder="Your email id..." required />
         <input type="tel" id="phone" name="phone" value={contactForm.phone} onChange={handleInput} placeholder="Your phone no..." required />
         <textarea id="message" rows="4" name="message" value={contactForm.message} onChange={handleInput} placeholder="How can we help you...." required></textarea>
         <button type="submit" id="btn" onClick={handleSubmit}>Submit</button>
-    </form>)
+    </form>
+    )
 }
 function ContactTitle()
 {
-    return(<div className="contactus-container">
+    return(<div className={style.contactusContainer}>
         <Form />
 </div>)
 }

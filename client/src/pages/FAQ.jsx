@@ -1,33 +1,34 @@
 import React from 'react'
-import "../css/Faq.css";
-import faqImg from "../img/Faq.gif";
+import style from "../css/Faq.module.css";
+import faqImg from "../img/faq.gif";
+import "react-bootstrap";
 function FaqTitle()
 {
-    return(<div className="container">
-    <div className="text-center">
+    return(<div className={style.container}>
+    <div className={style.textCenter}>
         <h2 style={{marginTop:'10px'}}>Frequently Asked Questions</h2>
-        <p className="lead">Share Your Doubts</p>
+        <p className={style.lead}>Share Your Doubts</p>
     </div>
 </div>)
 }
 function FaqContent()
 {
-    return(<div className="row my-5 g-5 justify-content-around align-items-center">
-    <div className="col-6 col-lg-4">
-        <image src={faqImg} alt="ebook" className="img-fluid" style={{minWidth:'500px'}}></image>
+    return(<div className={`row my-5 g-5 justify-content-around align-items-center`}>
+    <div className={`col-6 col-lg-4`}>
+        <img src={faqImg} alt="ebook" className={style.imgFluid} style={{minWidth:'500px'}}></img>
     </div>
-    <div className="col-lg-6">
-        <div className="accordion" id="FAQs">
-            <div className="accordion-item">
-                <h2 className="accordion-header">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse"
+    <div className={`col-lg-6`}>
+        <div className={style.accordion} id="FAQs">
+            <div className={style.accordionItem}>
+                <h2 className={`accordion-header`}>
+                    <button className={`accordion-button`} type="button" data-bs-toggle="collapse"
                         data-bs-target="#chapter-1" aria-expanded="true" aria-controls="chapter-1">
                         1. Why should you trust us?
                     </button>
                 </h2>
-                <div id="chapter-1" className="accordion-collapse collapse" aria-labelledby="heading-1"
+                <div id="chapter-1" className={`accordion-collapse collapse`} aria-labelledby="heading-1"
                     data-bs-parent="#chapters">
-                    <div className="accordion-body">
+                    <div className={`accordion-body`}>
                         <p>We have the collection of best doctors at your screen. Our team has verified
                             everyone's
                             professional skill. We are opearional 24*7 and all these facilities are being
@@ -36,7 +37,7 @@ function FaqContent()
                     </div>
                 </div>
             </div>
-            <div className="accordion-item doubt">
+            <div className={`accordion-item doubt`}>
                 <h2 className="accordion-header" id="heading-2">
                     <button className="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#chapter-2" aria-expanded="true" aria-controls="chapter-2">
@@ -102,16 +103,16 @@ function FaqContent()
                     </div>
                 </div>
             </div>
-            <div className="accordion-item doubt">
-                <h2 className="accordion-header" id="heading-5">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse"
+            <div className={`accordion-item doubt`}>
+                <h2 className={`accordion-header`} id="heading-5">
+                    <button className={`accordion-button`} type="button" data-bs-toggle="collapse"
                         data-bs-target="#chapter-5" aria-expanded="true" aria-controls="chapter-5">
                         6. Want to cotact us?
                     </button>
                 </h2>
-                <div id="chapter-5" className="accordion-collapse collapse" aria-labelledby="heading-1"
+                <div id="chapter-5" className={`accordion-collapse collapse`} aria-labelledby="heading-1"
                     data-bs-parent="#chapters">
-                    <div className="accordion-body">
+                    <div className={`accordion-body`}>
                         <p>Dont' worry, We are here to solve all your queries. Go to bottom of the page and you
                             will
                             find email id and contact no then mail or call us </p>
@@ -124,8 +125,7 @@ function FaqContent()
 }
 const Faq = () => {
     return (
-        <div className='main-container'>
-        <h1>Hello Faq</h1>
+        <div className={style.mainContainer}>
         <FaqTitle />
         <FaqContent />
         </div>
