@@ -253,40 +253,40 @@ function Book() {
     if (
       patientInfoInputs[3].max !==
       dateTime[0].tday_yy.toString() +
-        "-" +
-        dateTime[0].tday_mm.toString() +
-        "-" +
-        dateTime[0].tday_dd.toString()
+      "-" +
+      dateTime[0].tday_mm.toString() +
+      "-" +
+      dateTime[0].tday_dd.toString()
     ) {
       updateObjects(
         patientInfoInputs,
         "patientDOB",
         "max",
         dateTime[0].tday_yy.toString() +
-          "-" +
-          dateTime[0].tday_mm.toString() +
-          "-" +
-          dateTime[0].tday_dd.toString()
+        "-" +
+        dateTime[0].tday_mm.toString() +
+        "-" +
+        dateTime[0].tday_dd.toString()
       );
     }
 
     if (
       docInfoInputs[2].min !==
       dateTime[1].tm_yy.toString() +
-        "-" +
-        dateTime[1].tm_mm.toString() +
-        "-" +
-        dateTime[1].tm_dd.toString()
+      "-" +
+      dateTime[1].tm_mm.toString() +
+      "-" +
+      dateTime[1].tm_dd.toString()
     ) {
       updateObjects(
         docInfoInputs,
         "appointmentDate",
         "min",
         dateTime[1].tm_yy.toString() +
-          "-" +
-          dateTime[1].tm_mm.toString() +
-          "-" +
-          dateTime[1].tm_dd.toString()
+        "-" +
+        dateTime[1].tm_mm.toString() +
+        "-" +
+        dateTime[1].tm_dd.toString()
       );
     }
   }, [dateTime, patientInfoInputs, docInfoInputs]);
