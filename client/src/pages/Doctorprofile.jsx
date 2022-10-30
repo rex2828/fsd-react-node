@@ -1,9 +1,14 @@
 import React from 'react'
 import "../css/DoctorProfile.css";
+// @ts-ignore
 import unknownimg from "../img/unknown.png";
+import Headi from "../components/Header"
 function DoctorProfile()
 {
-    return(<div className="col-lg-8">
+    return(
+        <>
+        <Headi/>
+    <div className="col-lg-8">
     <div className="ps-lg-1-6 ps-xl-5">
         <div className="mb-5 wow fadeIn">
             <ul className="list-group list-group-flush">
@@ -38,7 +43,7 @@ function DoctorProfile()
             </div>
         </div>
     </div>
-</div>)
+</div></>)
 }
 function DoctorData()
 {

@@ -1,6 +1,7 @@
 import React from 'react'
+// @ts-ignore
 import style from "../css/Faq.module.css";
-import faqImg from "../img/faq.gif";
+// import faqImg from "../img/faq.gif";
 import "react-bootstrap";
 function FaqTitle()
 {
@@ -15,7 +16,7 @@ function FaqContent()
 {
     return(<div className={`row my-5 g-5 justify-content-around align-items-center`}>
     <div className={`col-6 col-lg-4`}>
-        <img src={faqImg} alt="ebook" className={style.imgFluid} style={{minWidth:'500px'}}></img>
+        {/* <img src={faqImg} alt="ebook" className={style.imgFluid} style={{minWidth:'500px'}}></img> */}
     </div>
     <div className={`col-lg-6`}>
         <div className={style.accordion} id="FAQs">
