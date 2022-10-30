@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const DoctorApplication = () => {
   const [doctorData, setDoctorData] = useState({
@@ -19,13 +21,42 @@ const DoctorApplication = () => {
     phone: "",
   });
 
-  const handleClick = (event) => {
+
+	const notifySuccess = () => toast.success("Application sent!");
+	const notifyError = () => toast.error("Something went wrong!");
+
+  const handleClick = async (event) => {
     event.preventDefault();
-    console.log(doctorData);
+    try {
+      const data = {
+        name: doctorData.name,
+        category: doctorData.category,
+        languages: doctorData.languages,
+        fee: doctorData.fee,
+        edu: doctorData.education,
+        experience: doctorData.experience,
+        email: doctorData.email,
+        mobile: doctorData.phone,
+        clinicaddress: doctorData.address,
+      }
+      const res = await fetch("http://localhost:3000/api/doctors/register", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(data)
+      })
+      const doctorRegister = await res.json()
+      console.log(doctorRegister)
+      if (doctorRegister) {
+        notifySuccess()
+      }
+    } catch (error) {
+			notifyError()
+    }
   };
 
   return (
-    <div>
+    <>
       <section className='vh-100'>
         <div className='container-fluid h-custom'>
           <div className='row d-flex justify-content-center align-items-center h-100'>
@@ -47,7 +78,7 @@ const DoctorApplication = () => {
                 </p>
                 <div className='divider d-flex align-items-center my-4'></div>
                 <div className='form-outline mb-4 me-2'>
-                  <label className='form-label' for='d-name'>
+                  <label className='form-label' htmlFor='d-name'>
                     Name
                   </label>
                   <input
@@ -65,7 +96,7 @@ const DoctorApplication = () => {
 
                 <div className='d-flex justify-content-between'>
                   <div className='form-outline mb-4 '>
-                    <label className='form-label' for='d-category'>
+                    <label className='form-label' htmlFor='d-category'>
                       Category
                     </label>
                     <input
@@ -103,7 +134,7 @@ const DoctorApplication = () => {
                       id='L1'
                       value='Hindi'
                     />
-                    <label className='form-check-label' for='Hindi'>
+                    <label className='form-check-label' htmlFor='Hindi'>
                       Hindi
                     </label>
                   </div>
@@ -115,7 +146,7 @@ const DoctorApplication = () => {
                       id='L2'
                       value='English'
                     />
-                    <label className='form-check-label' for='English'>
+                    <label className='form-check-label' htmlFor='English'>
                       English
                     </label>
                   </div>
@@ -127,13 +158,13 @@ const DoctorApplication = () => {
                       id='L3'
                       value='Telugu'
                     />
-                    <label className='form-check-label' for='Telgu'>
+                    <label className='form-check-label' htmlFor='Telgu'>
                       Telugu
                     </label>
                   </div>
                 </div>
                 <div className='form-outline mb-4 '>
-                  <label className='form-label ' for='d-edu'>
+                  <label className='form-label ' htmlFor='d-edu'>
                     Education Details
                   </label>
                   <input
@@ -149,14 +180,14 @@ const DoctorApplication = () => {
                   />
                 </div>
                 <div className='form-outline mb-3'>
-                  <label className='form-label' for='d-exp'>
+                  <label className='form-label' htmlFor='d-exp'>
                     Experience(in Years)
                   </label>
                   <input
                     type='number'
                     id='d-exp'
                     className='form-control form-control-lg'
-                    autocomplete='true'
+                    autoComplete='true'
                     placeholder='experience'
                     onChange={(e) => {
                       setDoctorData((prevState) => {
@@ -166,14 +197,14 @@ const DoctorApplication = () => {
                   />
                 </div>
                 <div className='form-outline mb-3'>
-                  <label className='form-label' for='d-fee'>
+                  <label className='form-label' htmlFor='d-fee'>
                     Fee(in Rs)
                   </label>
                   <input
                     type='number'
                     id='d-fee'
                     className='form-control form-control-lg'
-                    autocomplete='true'
+                    autoComplete='true'
                     placeholder='fee'
                     onChange={(e) => {
                       setDoctorData((prevState) => {
@@ -183,14 +214,14 @@ const DoctorApplication = () => {
                   />
                 </div>
                 <div className='form-outline'>
-                  <label className='form-label' for='d-address'>
+                  <label className='form-label' htmlFor='d-address'>
                     Enter Clinical Address
                   </label>
                   <input
                     type='text'
                     id='d-address'
                     className='form-control form-control-lg'
-                    autocomplete='true'
+                    autoComplete='true'
                     placeholder='address....'
                     onChange={(e) => {
                       setDoctorData((prevState) => {
@@ -200,7 +231,7 @@ const DoctorApplication = () => {
                   />
                 </div>
                 <div className='form-outline mb-4 '>
-                  <label className='form-label ' for='d-email'>
+                  <label className='form-label ' htmlFor='d-email'>
                     Email address
                   </label>
                   <input
@@ -216,7 +247,7 @@ const DoctorApplication = () => {
                   />
                 </div>
                 <div className='form-outline mb-4 '>
-                  <label className='form-label ' for='d-mobile'>
+                  <label className='form-label ' htmlFor='d-mobile'>
                     Contact No
                   </label>
                   <input
@@ -248,7 +279,8 @@ const DoctorApplication = () => {
           </div>
         </div>
       </section>
-    </div>
+			<ToastContainer />
+    </>
   );
 };
 
