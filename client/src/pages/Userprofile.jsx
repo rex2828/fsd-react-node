@@ -1,8 +1,49 @@
 import React from 'react'
+import { useEffect } from 'react';
+import { useState } from 'react';
 import 'react-bootstrap';
+import Appointment from '../components/Appointment';
 import style from '../css/UserProfile.module.css';
 import unknwonimg from '../img/unknown.png'
 const Userprofile = () => {
+
+    const [userData, setUserData] = useState({
+        fullname: "",
+        email: "",
+        username: "",
+        mobile: "",
+        address: "",
+    })
+
+    const [appointmentData, setAppointmentData] = useState([])
+
+    const fetchUserData = async () => {
+        const res = await fetch('http://localhost:3000/api/users/me', {
+          credentials: 'include'
+        })
+        const data = await res.json()
+        
+        setUserData({
+            fullname: data.name,
+            email: data.email,
+            username: data.username,
+        })
+    }
+
+    const fetchAppointmentData = async () => {
+        const res = await fetch('http://localhost:3000/api/getappointments', {
+            credentials: 'include'
+        });
+        const data = await res.json();
+        console.log(data)
+        setAppointmentData([...data])
+    }
+
+    useEffect(() => {
+        fetchUserData()
+        fetchAppointmentData()
+    }, [])
+
 
 	return (
 		<div className="container" style={{paddingTop:'40px'}}>
@@ -14,7 +55,7 @@ const Userprofile = () => {
                             <div className="d-flex flex-column align-items-center text-center">
                                 <div className="profile-pic-div">
                                     <img src={unknwonimg} alt="avatar" id="photo"  style={{paddingTop:'20px',paddingBottom:'20px'}}/>
-                                    <form method="POST" action="/api/users/upload" enctype="multipart/form-data" style={{fontSize:'1rem'}}>
+                                    <form method="POST" action="/api/users/upload" encType="multipart/form-data" style={{fontSize:'1rem'}}>
                                         <input type="file" name="image" id="image-input" style={{fontSize:'1rem'}} />
                                         <button type="submit" className="btn btn-primary mx-3"
                                             id="uploadbtn" style={{fontSize:'1rem',marginBottom:'20px'}}>Upload</button>
@@ -32,7 +73,7 @@ const Userprofile = () => {
                                     <h5 className="mb-0">Full Name</h5>
                                 </div>
                                 <div className="col-sm-9 text-secondary edit" id="fullname">
-									{/* {{user.name}} */} Gulshan Kumar
+									{userData.fullname}
                                 </div>
                             </div>
                             <hr />
@@ -41,7 +82,7 @@ const Userprofile = () => {
                                     <h5 className="mb-0">Email</h5>
                                 </div>
                                 <div className="col-sm-9 text-secondary edit" id="email">
-									{/* {{user.email}} */} gulshan.k20@iiits.in
+									{userData.email}
                                 </div>
                             </div>
                             <hr />
@@ -50,7 +91,7 @@ const Userprofile = () => {
                                     <h5 className="mb-0">Username</h5>
                                 </div>
                                 <div className="col-sm-9 text-secondary edit" id="username">
-									{/* {{user.username}} */} gulshan1002
+									{userData.username}
                                 </div>
                             </div>
                             <hr />
@@ -59,7 +100,7 @@ const Userprofile = () => {
                                     <h5 className="mb-0">Mobile</h5>
                                 </div>
                                 <div className="col-sm-9 text-secondary edit" id="mobile">
-									{/* {{user.mobile}} */} 68798278990
+									{userData.mobile ? userData.mobile : 'N/A'}
                                 </div>
                             </div>
                             <hr />
@@ -68,7 +109,7 @@ const Userprofile = () => {
                                     <h5 className="mb-0">Address</h5>
                                 </div>
                                 <div className="col-sm-9 text-secondary edit form-outline mb-4" id="address">
-                                    {/* {{user.address}} */} Patna,Bihar
+                                    {userData.address ? userData.address : 'N/A'}
                                 </div>
                             </div>
                             <hr />
@@ -85,10 +126,15 @@ const Userprofile = () => {
                         <div className="col-sm-8 mb-3">
                             <div className="card h-100">
                                 <div className={`${style.cardbody}card-body`}>
-                                    <h5 className="d-flex align-items-center mb-3">
-                                        <h5 className="appointmentHistory">Appointment History</h5>
-                                    </h5>
+                                    <h3 className="d-flex align-items-center mb-3">
+                                        Appointment History
+                                    </h3>
                                     <div id="appointments">
+                                        {
+                                            appointmentData.map((app) => {
+                                                return <Appointment key={app._id} props={app}/>
+                                            })
+                                        }
 									</div>
                                 </div>
                             </div>

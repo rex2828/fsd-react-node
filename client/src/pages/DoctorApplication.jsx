@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -64,7 +63,7 @@ const DoctorApplication = () => {
               <img
                 src='https://img.freepik.com/free-vector/flat-psychiatrist-elderly-patient-with-alzheimer-diseas-dementia-psychiatric-anxiety-disorder-doctor-help-old-man-with-confusion-head-treatment-mental-problems-loss-memory_88138-768.jpg?w=826'
                 className='img-fluid rounded mx-auto d-block mt-1 mb-2'
-                alt='Sample image'
+                alt='Sample'
               />
             </div>
 

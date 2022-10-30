@@ -20,7 +20,7 @@ const Doctor = ({doctor}) => {
             </td>
             <td>
                 <div className={styles.doctorTableName}>
-                    <a href="/doctorprofile">{doctor.name}</a>
+                    <a href={`/doctor-profile?id=${doctor._id}`}>{doctor.name}</a>
                     <p className="m-0">
                         <span className={`text-muted ${styles.edu}`}>{doctor.edu}</span>
                     </p>
