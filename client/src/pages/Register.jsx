@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Register = () => {
@@ -142,26 +144,32 @@ const Register = () => {
 
   const handleClick = async (event) => {
     event.preventDefault();
-    console.log(registerData);
-    let obj = {
-      name: registerData.fname + ' ' + registerData.lname,
-      username: registerData.username,
-      gender: registerData.gender,
-      email: registerData.email,
-      password: registerData.password,
-    }
-    if (valid.email && valid.password && valid.fname && valid.lname && valid.confirmPassword && valid.username) {
-      const res = await fetch("http://localhost:3000/api/users/register", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(obj)
-      });
-      const data = await res.json();
-      console.log(data);
-      localStorage.setItem('user', JSON.stringify(data.user))
-      navigate('/')
+    try {
+      let obj = {
+        name: registerData.fname + ' ' + registerData.lname,
+        username: registerData.username,
+        gender: registerData.gender,
+        email: registerData.email,
+        password: registerData.password,
+      }
+      if (valid.email && valid.password && valid.fname && valid.lname && valid.confirmPassword && valid.username && registerData.gender) {
+        const res = await fetch("http://localhost:3000/api/users/register", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(obj)
+        });
+        const data = await res.json();
+        localStorage.setItem('user', JSON.stringify(data.user))
+        navigate('/')
+      }
+    } catch (error) {
+      notifyError()
     }
   };
+
+	const notifyError = () => toast.error("Something went wrong!");
+
 
   return (
     <div>
@@ -386,6 +394,7 @@ const Register = () => {
               </form>
             </div>
           </div>
+    			<ToastContainer />
         </div>
       </section>
     </div>

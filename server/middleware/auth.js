@@ -6,7 +6,7 @@ const auth = async (req, res, next) => {
         jwt.verify(token, 'jwtsecret', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
-                res.redirect('/login');
+                res.status(500).send()
             } else {
                 const user = await User.findById(decodedToken.id);
                 req.user = user;
@@ -14,7 +14,7 @@ const auth = async (req, res, next) => {
             }
         })
     } else {
-        res.redirect('/login');
+        res.status(500).send()
     }
 }
 

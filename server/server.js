@@ -8,7 +8,7 @@ const cors = require('cors')
 const port = 3000;
 const app = express();
 connectDB();
-app.use(cors({origin: "*"}))
+app.use(cors({credentials: true, origin: 'http://localhost:3001'}))
 app.use(express.json());
 app.use(cookieParser());
 

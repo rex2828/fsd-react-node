@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -58,19 +59,24 @@ const Login = () => {
 
   const handleClick = async (event) => {
     event.preventDefault();
-    if (valid.email && valid.password) {
-      console.log(loginData)
-      const res = await fetch("http://localhost:3000/api/users/login", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(loginData)
-      });
-      const data = await res.json();
-      console.log(data);
-      localStorage.setItem('user', JSON.stringify(data.user))
-      navigate('/')
+    try {
+      if (valid.email && valid.password) {
+        const res = await fetch("http://localhost:3000/api/users/login", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(loginData)
+        });
+        const data = await res.json();
+        localStorage.setItem('user', JSON.stringify(data.user))
+        navigate('/')
+      }
+    } catch (error) {
+      notifyError()
     }
   };
+
+	const notifyError = () => toast.error("Something went wrong!");
 
   return (
     <div>
@@ -190,6 +196,7 @@ const Login = () => {
               </form>
             </div>
           </div>
+    			<ToastContainer />
         </div>
       </section>
     </div>
