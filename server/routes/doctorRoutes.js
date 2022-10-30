@@ -7,4 +7,5 @@ router.route('/getdoctors').get(doctorController.getDoctors);
 router.route('/approve').get(auth, adminauth, doctorController.approveDoctor);
 router.route('/deleteDoctor').get(auth, adminauth, doctorController.deleteDoctor);
 router.route('/doctorappointments').get(auth, doctorauth, doctorController.doctorappointments);
+router.route('/doctor/:id').get(doctorController.getDoctorById);
 module.exports = router;

@@ -61,10 +61,10 @@ const Login = () => {
     event.preventDefault();
     try {
       if (valid.email && valid.password) {
-        console.log(loginData)
         const res = await fetch("http://localhost:3000/api/users/login", {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify(loginData)
         });
         const data = await res.json();

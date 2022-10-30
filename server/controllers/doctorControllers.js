@@ -78,6 +78,17 @@ class doctorController {
             throw new Error('can not fetch appointments');
         }
     })
+
+    static getDoctorById = asyncHandler(async (req, res) => {
+        const doctorId = req.params.id;
+        const doctor = await Doctor.findById({ _id: doctorId });
+        if (doctor) {
+            res.send(doctor)
+        }
+        else {
+            throw new Error('can not fetch appointments');
+        }
+    })
 }
 
 

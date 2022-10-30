@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import InputMap from "../components/Book/InputMap";
 import Button from "../components/Book/Button";
 import styles from "../css/Book.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 function Book() {
   const [patientInfoInputs, setPatientInfoInputs] = useState([
@@ -327,7 +331,28 @@ function Book() {
     setButtons(newButtons);
   }
 
-  function submitHandler(event) {
+  const [searchParams] = useSearchParams();
+
+  const fetchDoctor = useCallback(async () => {
+    const res = await fetch(`http://localhost:3000/api/doctors/doctor/${searchParams.get("doctor")}`)
+    const doctorDetails = await res.json()
+    const obj = {
+      doctorName: doctorDetails.name,
+      doctorSpecialization: doctorDetails.category,
+      appointmentLocState: doctorDetails.clinicaddress.split(',')[1],
+      appointmentLocCity: doctorDetails.clinicaddress.split(',')[0],
+    }
+    setDocInfoValues((prevState) => {
+      return {...prevState, ...obj}
+    })
+  }, [searchParams])
+
+  useEffect(()=> {
+    fetchDoctor()
+  }, [fetchDoctor])
+
+
+  async function submitHandler(event) {
     event.preventDefault();
     const values = {};
     let isEmpty = false;
@@ -353,7 +378,32 @@ function Book() {
       });
     }
     if (!isEmpty) {
-      console.log(values);
+      // here
+      const obj = {
+        name: patientInfoValues.patientFirstName + ' ' + patientInfoValues.patientLastName,
+        mobile: patientInfoValues.patientMobileNo,
+        email: patientInfoValues.patientEmail,
+        gender: patientInfoValues.patientSex,
+        state: patientInfoValues.patientState,
+        city: patientInfoValues.patientCity,
+        reason: patientInfoValues.appointmentReason,
+        dob: patientInfoValues.patientDOB,
+        age: patientInfoValues.patientAge,
+        appointmentDate: patientInfoValues.appointmentDate,
+        appointmentTime: patientInfoValues.appointmentTime,
+    }
+      const res = await fetch(`http://localhost:3000/api/bookappointment?id=${searchParams.get("doctor")}`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(obj)
+      })
+      const appointment = await res.json()
+      if (appointment.status === 'ok') {
+        notifySuccess()
+      } else {
+        notifyError()
+      }
     } else {
       const newPatientInfoInputs = patientInfoInputs.map((input) => {
         if (input.setSpan === false) {
@@ -364,6 +414,9 @@ function Book() {
       setPatientInfoInputs(newPatientInfoInputs);
     }
   }
+
+	const notifySuccess = () => toast.success("Appointment booked!");
+	const notifyError = () => toast.error("Something went wrong!");
 
   function onBlur(event) {
     if (event.target.id === "patientDOB") {
@@ -595,6 +648,7 @@ function Book() {
           </div>
         </form>
       </div>
+			<ToastContainer />
     </div>
   );
 }
