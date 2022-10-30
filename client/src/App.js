@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Headi from "./components/Header";
 import Foote from "./components/Footer";
 import Doctor from "./pages/Doctors";
+import DoctorApplication from "./pages/DoctorApplication";
 import React from "react";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 				<Route path="/register" element={<Register />} />
 				<Route path="/doctor-profile" element={<Doctorprofile />} />
 				<Route path="/book" element={<Book />} />
+				<Route path="/apply" element={<DoctorApplication />} />
 				<Route path="/user-profile" element={<Userprofile />} />
 				<Route path="/doctors" element={<Doctor />} />
 				<Route path="/admin" element={<Admin />} />
