@@ -1,13 +1,10 @@
 import React from 'react'
 import "../css/Home.css"
-import Headi from "../components/Header"
-import Foote from "../components/Footer"
 import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <>
-      <Headi/>
       <section className="banner_part">
         <div className="container">
             <div className="row align-items-center">
@@ -208,7 +205,6 @@ const Home = () => {
             </div>
         </div>
     </div>
-    <Foote/>
     </>
   )
 }

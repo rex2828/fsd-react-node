@@ -1,6 +1,7 @@
 import React from 'react'
-import style from "../css/About.module.css"
+import style from "../css/About.module.css";
 import 'react-bootstrap';
+
 const About = () => {
   return (
     <div>
@@ -9,7 +10,7 @@ const About = () => {
             <h1>Our team members</h1>
         </div>
         <div className={style.main}>
-            {/* <div className={style.profileCard}>
+            <div className={style.profileCard}>
                 <div className={style.img}><img
                         src="https://thumbs.dreamstime.com/b/boy-face-avatar-profile-picture-afroamerican-smiling-cartoon-character-portrait-vector-illustration-graphic-design-149739088.jpg"
                         alt="" srcset="" /></div>
@@ -21,7 +22,7 @@ const About = () => {
                         </li>
                     </ul>
                 </div>
-            </div> */}
+            </div>
             <div className={style.profileCard}>
                 <div className={style.img}><img
                         src="https://thumbs.dreamstime.com/b/boy-face-avatar-profile-picture-afroamerican-smiling-cartoon-character-portrait-vector-illustration-graphic-design-149739088.jpg"

@@ -11,18 +11,22 @@ import FAQ from "./pages/FAQ";
 import Page404 from "./pages/Page404";
 import Book from "./pages/Book";
 import Contact from "./pages/Contact";
+import Headi from "./components/Header";
+import Foote from "./components/Footer";
 import Doctor from "./pages/Doctors";
 import React from "react";
 
 function App() {
 	return (
 		<div className="App">
+			{/* {window.location.pathname !== "/book" ? <Headi /> : null} */}
+			<Headi />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
-				<Route path="/book" element={<Book />} />
 				<Route path="/doctor-profile" element={<Doctorprofile />} />
+				<Route path="/book" element={<Book />} />
 				<Route path="/user-profile" element={<Userprofile />} />
 				<Route path="/doctors" element={<Doctor />} />
 				<Route path="/admin" element={<Admin />} />
@@ -32,6 +36,7 @@ function App() {
 				<Route path="/faq" element={<FAQ />} />
 				<Route path="*" element={<Page404 />} />
 			</Routes>
+			{window.location.pathname !== "/book" ? <Foote /> : null}
 		</div>
 	);
 }

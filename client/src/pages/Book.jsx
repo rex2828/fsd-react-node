@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
-function Book() {
+function Book () {
   const [patientInfoInputs, setPatientInfoInputs] = useState([
     {
       id: "patientFirstName",
@@ -214,7 +214,7 @@ function Book() {
   ]);
 
   useEffect(() => {
-    function updateObjects(objects, id, key, value) {
+    function updateObjects (objects, id, key, value) {
       const updatedObjects = objects.map((object) => {
         if (object.id === id) {
           return { ...object, [key]: value };
@@ -257,52 +257,52 @@ function Book() {
     if (
       patientInfoInputs[3].max !==
       dateTime[0].tday_yy.toString() +
-        "-" +
-        dateTime[0].tday_mm.toString() +
-        "-" +
-        dateTime[0].tday_dd.toString()
+      "-" +
+      dateTime[0].tday_mm.toString() +
+      "-" +
+      dateTime[0].tday_dd.toString()
     ) {
       updateObjects(
         patientInfoInputs,
         "patientDOB",
         "max",
         dateTime[0].tday_yy.toString() +
-          "-" +
-          dateTime[0].tday_mm.toString() +
-          "-" +
-          dateTime[0].tday_dd.toString()
+        "-" +
+        dateTime[0].tday_mm.toString() +
+        "-" +
+        dateTime[0].tday_dd.toString()
       );
     }
 
     if (
       docInfoInputs[2].min !==
       dateTime[1].tm_yy.toString() +
-        "-" +
-        dateTime[1].tm_mm.toString() +
-        "-" +
-        dateTime[1].tm_dd.toString()
+      "-" +
+      dateTime[1].tm_mm.toString() +
+      "-" +
+      dateTime[1].tm_dd.toString()
     ) {
       updateObjects(
         docInfoInputs,
         "appointmentDate",
         "min",
         dateTime[1].tm_yy.toString() +
-          "-" +
-          dateTime[1].tm_mm.toString() +
-          "-" +
-          dateTime[1].tm_dd.toString()
+        "-" +
+        dateTime[1].tm_mm.toString() +
+        "-" +
+        dateTime[1].tm_dd.toString()
       );
     }
   }, [dateTime, patientInfoInputs, docInfoInputs]);
 
-  function getAge(dob) {
+  function getAge (dob) {
     if (Math.floor((new Date() - dob) / 1000 / 60 / 60 / 24 / 365.25) + 1 < 0) {
       return 0;
     }
     return Math.floor((new Date() - dob) / 1000 / 60 / 60 / 24 / 365.25);
   }
 
-  function updateObjects(objects, id, key, value) {
+  function updateObjects (objects, id, key, value) {
     const updatedObjects = objects.map((object) => {
       if (object.id === id) {
         return { ...object, [key]: value };
@@ -317,7 +317,7 @@ function Book() {
     }
   }
 
-  function updateButtons(updatedButtons) {
+  function updateButtons (updatedButtons) {
     const newButtons = buttons.map((button, index) => {
       if (button.id === updatedButtons[index].id) {
         return {
@@ -334,25 +334,25 @@ function Book() {
   const [searchParams] = useSearchParams();
 
   const fetchDoctor = useCallback(async () => {
-    const res = await fetch(`http://localhost:3000/api/doctors/doctor/${searchParams.get("doctor")}`)
-    const doctorDetails = await res.json()
+    const res = await fetch(`http://localhost:3000/api/doctors/doctor/${searchParams.get("doctor")}`);
+    const doctorDetails = await res.json();
     const obj = {
       doctorName: doctorDetails.name,
       doctorSpecialization: doctorDetails.category,
       appointmentLocState: doctorDetails.clinicaddress.split(',')[1],
       appointmentLocCity: doctorDetails.clinicaddress.split(',')[0],
-    }
+    };
     setDocInfoValues((prevState) => {
-      return {...prevState, ...obj}
-    })
-  }, [searchParams])
+      return { ...prevState, ...obj };
+    });
+  }, [searchParams]);
 
-  useEffect(()=> {
-    fetchDoctor()
-  }, [fetchDoctor])
+  useEffect(() => {
+    fetchDoctor();
+  }, [fetchDoctor]);
 
 
-  async function submitHandler(event) {
+  async function submitHandler (event) {
     event.preventDefault();
     const values = {};
     let isEmpty = false;
@@ -391,18 +391,18 @@ function Book() {
         age: patientInfoValues.patientAge,
         appointmentDate: patientInfoValues.appointmentDate,
         appointmentTime: patientInfoValues.appointmentTime,
-    }
+      };
       const res = await fetch(`http://localhost:3000/api/bookappointment?id=${searchParams.get("doctor")}`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(obj)
-      })
-      const appointment = await res.json()
+      });
+      const appointment = await res.json();
       if (appointment.status === 'ok') {
-        notifySuccess()
+        notifySuccess();
       } else {
-        notifyError()
+        notifyError();
       }
     } else {
       const newPatientInfoInputs = patientInfoInputs.map((input) => {
@@ -415,10 +415,10 @@ function Book() {
     }
   }
 
-	const notifySuccess = () => toast.success("Appointment booked!");
-	const notifyError = () => toast.error("Something went wrong!");
+  const notifySuccess = () => toast.success("Appointment booked!");
+  const notifyError = () => toast.error("Something went wrong!");
 
-  function onBlur(event) {
+  function onBlur (event) {
     if (event.target.id === "patientDOB") {
       if (event.target.value === "") {
         updateObjects(patientInfoInputs, "patientDOB", "type", "text");
@@ -442,7 +442,7 @@ function Book() {
     }
   }
 
-  function onFocus(event) {
+  function onFocus (event) {
     if (event.target.id === "patientDOB") {
       updateObjects(patientInfoInputs, "patientDOB", "type", "date");
       document.body.click();
@@ -457,7 +457,7 @@ function Book() {
     }
   }
 
-  function onInput(event) {
+  function onInput (event) {
     if (event.target.id === "patientMobileNo") {
       event.target.value = event.target.value
         .replace(/[^+0-9]/g, "")
@@ -465,7 +465,7 @@ function Book() {
     }
   }
 
-  function onChange(event) {
+  function onChange (event) {
     setPatientInfoValues((prevState) => {
       return { ...prevState, [event.target.name]: event.target.value };
     });
@@ -496,7 +496,7 @@ function Book() {
     });
   }
 
-  async function onClickButton(event) {
+  async function onClickButton (event) {
     let isEmptyPatient = false;
     for (const [key, value] of Object.entries(patientInfoValues)) {
       if (
@@ -531,9 +531,9 @@ function Book() {
       } else {
         const res = await fetch('http://localhost:3000/api/users/me', {
           credentials: 'include'
-        })
-        const userData = await res.json()
-        console.log(userData)
+        });
+        const userData = await res.json();
+        console.log(userData);
         setPatientInfoValues({
           patientFirstName: userData.name.split(' ')[0],
           patientLastName: userData.name.split(' ')[1],
@@ -544,7 +544,7 @@ function Book() {
           patientState: "",
           patientCity: "",
           appointmentReason: "",
-        })
+        });
       }
     }
 
@@ -592,12 +592,12 @@ function Book() {
     }
   }
 
-  function onClickMenu(id) {
+  function onClickMenu (id) {
     updateObjects(patientInfoInputs, id, "setSpan", true);
   }
 
   return (
-    <div className={styles["book-appointment"]}>
+    <div className={styles["book-appointment"]} style={{ paddingTop: "7rem" }}>
       <div className={styles["appointment-form"]}>
         <h1 className={styles["title"]}>Appointment Form</h1>
         <form onSubmit={submitHandler} className={styles["form"]}>
@@ -665,7 +665,7 @@ function Book() {
           </div>
         </form>
       </div>
-			<ToastContainer />
+      <ToastContainer />
     </div>
   );
 }
