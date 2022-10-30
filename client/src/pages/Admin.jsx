@@ -1,5 +1,7 @@
 import React from "react";
+import { SearchSVG, PersonCircleSVG, AddCircleSVG, CloseCircleSVG } from "../svg/svg";
 
+import AdminNav from "../components/Admin/AdminNav";
 import InfoCard from "../components/Admin/InfoCard";
 import styles from "../css/Admin.module.css";
 
@@ -13,54 +15,20 @@ function Admin() {
 
   return (
     <div className={`${styles["admin"]}`}>
-      <header className={`${styles["page-header"]}`}>
-        <nav>
-          <button className={`toggle-mob-menu`} aria-expanded="false" aria-label="open menu">
-            <svg viewBox="0 0 512 512">
-              <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="32"
-                d="M96 256h320M96 176h320M96 336h320" />
-            </svg>
-          </button>
-          <ul className={`${styles["admin-menu"]}`}>
-            <img src={logo} alt="logo" />
-            <li className={`${styles["menu-heading"]}`}>
-              <h3>Admin</h3>
-            </li>
-            <li>
-              <div className={`${styles["anchor"]}`} id="patientsNavBtn">
-                <span>Patient's Data</span>
-              </div>
-            </li>
-            <li>
-              <div className={`${styles["anchor"]}`} id="doctorsNavBtn">
-                <span>Doctor's Data</span>
-              </div>
-            </li>
-            <li>
-              <div className={`${styles["anchor"]} ${styles["hide"]}`} id="doctorsNavBtn">
-                <span>Back</span>
-              </div>
-            </li>
-            <li>
-              <button className={`${styles["collapse-btn"]}`} aria-expanded="true" aria-label="collapse menu">
-                <span>Collapse</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <AdminNav className={styles} logo={logo} />
       <div className={`${styles["page-content"]}`}>
         <section className={`${styles["search-and-user"]}`}>
           <form onSubmit={submitHandler}>
             <input type="search" placeholder="Search Pages..." />
             <button type="submit" aria-label="submit form">
-
+              <SearchSVG className={`${styles["svg"]}`} />
             </button>
           </form>
           <div className={`${styles["admin-profile"]}`}>
             <span className={`${styles["greeting"]}`}>Admin</span>
-            <div className={`${styles["notification"]}`}>
+            <div className={`${styles["notifications"]}`}>
               <span className={`${styles["badge"]}`}>1</span>
+              <PersonCircleSVG className={`${styles["svg"]}`} />
             </div>
           </div>
         </section>
@@ -77,11 +45,13 @@ function Admin() {
           <div id="doctorSectionHandlers" className={`${styles["doctor-section-handlers"]}`}>
             <div id="approveDoctors" className={`${styles["btncard"]} ${styles["approve-doctors"]}`}>
               <div className={`${styles["card-body"]}`}>
+                <AddCircleSVG className={`${styles["svg"]}`} />
                 Approve Doctors
               </div>
             </div>
             <div id="removeDoctors" className={`${styles["btncard"]} ${styles["remove-doctors"]}`}>
               <div className={`${styles["card-body"]}`}>
+                <CloseCircleSVG className={`${styles["svg"]}`} />
                 Remove Doctors
               </div>
             </div>
