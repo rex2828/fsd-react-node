@@ -329,18 +329,30 @@ function Book() {
 
   function submitHandler(event) {
     event.preventDefault();
-    if (
-      patientInfoValues.patientSex.trim().length !== 0 &&
-      patientInfoValues.patientState.trim().length !== 0 &&
-      patientInfoValues.patientCity.trim().length !== 0
-    ) {
-      const values = {};
-      for (const [key, value] of Object.entries(patientInfoValues)) {
-        values[key] = value.toString().trim();
-        setPatientInfoValues((prevState) => {
-          return { ...prevState, [key]: value.toString().trim() };
-        });
+    const values = {};
+    let isEmpty = false;
+    for (const [key, value] of Object.entries(patientInfoValues)) {
+      values[key] = value.toString().trim();
+      setPatientInfoValues((prevState) => {
+        return { ...prevState, [key]: value.toString().trim() };
+      });
+      if (
+        key !== "patientMobileNo" &&
+        key !== "appointmentReason" &&
+        key !== "appointmentDate" &&
+        key !== "appointmentTime" &&
+        value.toString().trim().length === 0
+      ) {
+        isEmpty = true;
       }
+    }
+    for (const [key, value] of Object.entries(docInfoValues)) {
+      values[key] = value.toString().trim();
+      setDocInfoValues((prevState) => {
+        return { ...prevState, [key]: value.toString().trim() };
+      });
+    }
+    if (!isEmpty) {
       console.log(values);
     } else {
       const newPatientInfoInputs = patientInfoInputs.map((input) => {
@@ -415,10 +427,15 @@ function Book() {
         Math.floor(
           (new Date() - new Date(event.target.value)) / 1000 / 60 / 60 / 24
         )
-      )
+      ) {
         setPatientInfoValues((prevState) => {
           return { ...prevState, patientAge: age };
         });
+      } else {
+        setPatientInfoValues((prevState) => {
+          return { ...prevState, patientAge: 0 };
+        });
+      }
     }
 
     setDocInfoValues((prevState) => {
