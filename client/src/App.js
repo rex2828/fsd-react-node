@@ -12,6 +12,7 @@ import Page404 from './pages/Page404'
 import Book from './pages/Book'
 import Contact from './pages/Contact';
 import Doctor from './pages/Doctors'
+import DoctorApplication from './pages/DoctorApplication'
 function App() {
   return (
     <div className="App">
@@ -21,6 +22,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/book' element={<Book />} />
         <Route path='/doctor-profile' element={<Doctorprofile />} />
+        <Route path='/doctor-application' element={<DoctorApplication />} />
         <Route path='/user-profile' element={<Userprofile />} />
         <Route path='/doctors' element={<Doctor/>} />
         <Route path='/admin' element={<Admin />} />
