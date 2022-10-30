@@ -78,10 +78,10 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error('User already exists');
     }
     const user = await User.create({
-        name, username, gender, email, verified: false, password, mobile, address, pic, appointments
+        name, username, gender, email, verified: true, password, mobile, address, pic, appointments
     });
 
-    sendVerificationEmail(user, res);
+    // sendVerificationEmail(user, res);
 
     if (user) {
         res.status(201).json({ user: user._id });
@@ -208,6 +208,7 @@ const makeAdmin = asyncHandler(async (req, res) => {
     const user = await User.findByIdAndUpdate(userid, { isAdmin: true })
     res.status(200).redirect('/verified?m1=Given Admin Previledges&m2= ')
 })
+
 module.exports = { registerUser, authUser, logout, updateUser, uploadAvatar, verifyEmail, getUserdata, getAllUsers, deleteUser, makeAdmin };
 
 

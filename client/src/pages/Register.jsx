@@ -156,6 +156,7 @@ const Register = () => {
         const res = await fetch("http://localhost:3000/api/users/register", {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify(obj)
         });
         const data = await res.json();

@@ -1,8 +1,15 @@
 import React from 'react'
 import styles from '../css/Doctors.module.css'
+import { useNavigate } from 'react-router-dom'
+
 const Doctor = ({doctor}) => {
 
+  const navigate = useNavigate()
 
+
+    const handleBook = () => {
+        navigate(`/book?doctor=${doctor._id}`)
+    }
 
     return (
         <tr>
@@ -49,7 +56,7 @@ const Doctor = ({doctor}) => {
                 </div>
             </td>
             <td>
-                <button className={styles.btnSuccess}>Book Appointment</button>
+                <button onClick={handleBook} className={styles.btnSuccess}>Book Appointment</button>
             </td>
         </tr>
     )
