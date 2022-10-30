@@ -2,6 +2,10 @@ import React from "react";
 import "react-bootstrap";
 import imgSrc from '../img/contactSvg.svg';
 import {useState} from 'react';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 function Contact() {
 	const [contactForm, setContactForm]  = useState({
 		username:"",
@@ -17,14 +21,34 @@ function Contact() {
         // validateInput(name,value);
         setContactForm({...contactForm,[name]:value});
     }
-    function handleSubmit(event)
+    async function handleSubmit(event)
     {
         event.preventDefault();
-        const contactData ={...contactForm};
-		setContactForm({...contactForm, contactData});
-		setContactForm({username:"",email:"",phone:"",message:""});
-        console.table(contactData);
+		try {
+			const obj = {
+				name: contactForm.username,
+				email: contactForm.email,
+				phone: contactForm.phone,
+				message: contactForm.message
+			}
+			const res = await fetch("http://localhost:3000/api/postContactData", {
+				method: "POST",
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(obj)
+			})
+			const data = await res.json();
+			console.log(data);
+			if (data) {
+				notifySuccess()
+			}
+		} catch (error) {
+			notifyError()
+		}
     }
+
+	const notifySuccess = () => toast.success("Message sent!");
+	const notifyError = () => toast.error("Something went wrong!");
+
 	return (
 		<div className="contact3 py-5">
 		<div className="row no-gutters">
@@ -100,6 +124,7 @@ function Contact() {
 				</div>
 			</div>
 			</div>
+			<ToastContainer />
         </div>
       </div>
     </div>
