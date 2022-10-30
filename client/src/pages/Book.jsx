@@ -496,7 +496,7 @@ function Book() {
     });
   }
 
-  function onClickButton(event) {
+  async function onClickButton(event) {
     let isEmptyPatient = false;
     for (const [key, value] of Object.entries(patientInfoValues)) {
       if (
@@ -528,6 +528,23 @@ function Book() {
           },
         ];
         updateButtons(updatedButtons);
+      } else {
+        const res = await fetch('http://localhost:3000/api/users/me', {
+          credentials: 'include'
+        })
+        const userData = await res.json()
+        console.log(userData)
+        setPatientInfoValues({
+          patientFirstName: userData.name.split(' ')[0],
+          patientLastName: userData.name.split(' ')[1],
+          patientMobileNo: "",
+          patientDOB: "",
+          patientAge: "",
+          patientEmail: userData.email,
+          patientState: "",
+          patientCity: "",
+          appointmentReason: "",
+        })
       }
     }
 
