@@ -28,9 +28,9 @@ function Book() {
       id: "patientMobileNo",
       name: "patientMobileNo",
       type: "tel",
-      errorMessage: "Input pattern: 0123456789 or +910123456789",
-      placeholder: "Mobile No",
-      label: "Patient's Mobile No",
+      errorMessage: "Mobile pattern: 0123456789 or +910123456789",
+      placeholder: "Mobile Number",
+      label: "Patient's Mobile No.",
       pattern: "^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$",
       minLength: "10",
       maxLength: "13",
@@ -104,7 +104,7 @@ function Book() {
       label: "Appointment Reason",
     },
   ]);
-  const [patientInfoValues, sePatientInfoValues] = useState({
+  const [patientInfoValues, setPatientInfoValues] = useState({
     patientFirstName: "",
     patientLastName: "",
     patientMobileNo: "",
@@ -139,7 +139,8 @@ function Book() {
       id: "appointmentDate",
       name: "appointmentDate",
       type: "text",
-      errorMessage: "Please Provide the date on which you want the Appointment",
+      errorMessage:
+        "Please Provide the correct date on which you want the Appointment",
       placeholder: "Appointment Date",
       label: "Appointment Date",
       min: "",
@@ -193,21 +194,6 @@ function Book() {
       value: "Next",
     },
   ]);
-
-  function updateObjects(objects, id, key, value) {
-    const updatedObjects = objects.map((object) => {
-      if (object.id === id) {
-        return { ...object, [key]: value };
-      }
-      return object;
-    });
-
-    if (objects === patientInfoInputs) {
-      setPatientInfoInputs(updatedObjects);
-    } else if (objects === docInfoInputs) {
-      setdocInfoInputs(updatedObjects);
-    }
-  }
 
   const [dateTime, setdateTime] = useState([
     {
@@ -305,6 +291,28 @@ function Book() {
     }
   }, [dateTime, patientInfoInputs, docInfoInputs]);
 
+  function getAge(dob) {
+    if (Math.floor((new Date() - dob) / 1000 / 60 / 60 / 24 / 365.25) + 1 < 0) {
+      return 0;
+    }
+    return Math.floor((new Date() - dob) / 1000 / 60 / 60 / 24 / 365.25);
+  }
+
+  function updateObjects(objects, id, key, value) {
+    const updatedObjects = objects.map((object) => {
+      if (object.id === id) {
+        return { ...object, [key]: value };
+      }
+      return object;
+    });
+
+    if (objects === patientInfoInputs) {
+      setPatientInfoInputs(updatedObjects);
+    } else if (objects === docInfoInputs) {
+      setdocInfoInputs(updatedObjects);
+    }
+  }
+
   function updateButtons(updatedButtons) {
     const newButtons = buttons.map((button, index) => {
       if (button.id === updatedButtons[index].id) {
@@ -319,13 +327,6 @@ function Book() {
     setButtons(newButtons);
   }
 
-  function getAge(dob) {
-    if (Math.floor((new Date() - dob) / 1000 / 60 / 60 / 24 / 365.25) + 1 < 0) {
-      return 0;
-    }
-    return Math.floor((new Date() - dob) / 1000 / 60 / 60 / 24 / 365.25);
-  }
-
   function submitHandler(event) {
     event.preventDefault();
     if (
@@ -333,7 +334,14 @@ function Book() {
       patientInfoValues.patientState.trim().length !== 0 &&
       patientInfoValues.patientCity.trim().length !== 0
     ) {
-      console.log(patientInfoValues);
+      const values = {};
+      for (const [key, value] of Object.entries(patientInfoValues)) {
+        values[key] = value.toString().trim();
+        setPatientInfoValues((prevState) => {
+          return { ...prevState, [key]: value.toString().trim() };
+        });
+      }
+      console.log(values);
     } else {
       const newPatientInfoInputs = patientInfoInputs.map((input) => {
         if (input.setSpan === false) {
@@ -393,11 +401,11 @@ function Book() {
   }
 
   function onChange(event) {
-    sePatientInfoValues((prevState) => {
+    setPatientInfoValues((prevState) => {
       return { ...prevState, [event.target.name]: event.target.value };
     });
     if (event.target.name === "patientState") {
-      sePatientInfoValues((prevState) => {
+      setPatientInfoValues((prevState) => {
         return { ...prevState, patientCity: "" };
       });
     }
@@ -408,7 +416,7 @@ function Book() {
           (new Date() - new Date(event.target.value)) / 1000 / 60 / 60 / 24
         )
       )
-        sePatientInfoValues((prevState) => {
+        setPatientInfoValues((prevState) => {
           return { ...prevState, patientAge: age };
         });
     }
