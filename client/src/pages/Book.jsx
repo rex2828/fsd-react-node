@@ -377,6 +377,8 @@ function Book() {
       });
     }
     if (!isEmpty) {
+      console.log(patientInfoValues)
+      console.log("Hello")
       // here
       const obj = {
         name: patientInfoValues.patientFirstName + ' ' + patientInfoValues.patientLastName,
@@ -388,8 +390,8 @@ function Book() {
         reason: patientInfoValues.appointmentReason,
         dob: patientInfoValues.patientDOB,
         age: patientInfoValues.patientAge,
-        appointmentDate: patientInfoValues.appointmentDate,
-        appointmentTime: patientInfoValues.appointmentTime,
+        appointmentDate: docInfoValues.appointmentDate,
+        appointmentTime: docInfoValues.appointmentTime,
       };
       const res = await fetch(`http://localhost:3000/api/bookappointment?id=${searchParams.get("doctor")}`, {
         method: "POST",
@@ -533,33 +535,15 @@ function Book() {
         });
         const userData = await res.json();
         console.log(userData);
-        // setPatientInfoValues({
-        //   patientFirstName: userData.name.split(' ')[0],
-        //   patientLastName: userData.name.split(' ')[1],
-        //   patientMobileNo: "",
-        //   patientDOB: "",
-        //   patientAge: "",
-        //   patientEmail: userData.email,
-        //   patientSex: "",
-        //   patientState: "",
-        //   patientCity: "",
-        //   appointmentReason: "",
-        // });
         setPatientInfoValues((prevState) => {
           return {
             ...prevState,
             patientFirstName: userData.name.split(' ')[0],
             patientLastName: userData.name.split(' ')[1],
-            patientMobileNo: "",
-            patientDOB: "",
-            patientAge: "",
             patientEmail: userData.email,
-            patientSex: "",
-            patientState: "",
-            patientCity: "",
-            appointmentReason: "",
+            patientSex: userData.gender,
           };
-        })
+        });
       }
     }
 

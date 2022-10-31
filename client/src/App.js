@@ -14,10 +14,10 @@ import Contact from "./pages/Contact";
 import Doctor from "./pages/Doctors";
 import DoctorApplication from "./pages/DoctorApplication";
 import Calender from "./pages/Calender"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-
+import cookie from 'react-cookie'
 function App() {
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -32,9 +32,14 @@ function App() {
 		})
 	}
 
+	useEffect(() => {
+		cookie.load('jwt') ? setIsLoggedIn(true) : setIsLoggedIn(false)
+	}, [isLoggedIn])
+
+
 	return (
 		<div className="App">
-			{location.pathname !== '/login' && location.pathname!=='/register' && location.pathname!=='/event' && <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>}
+			{location.pathname !== '/login' && location.pathname!=='/register' && location.pathname!=='/event' && location.pathname!== '/admin' && <Header isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>}
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login handleLogin={handleLogin} />} />
@@ -52,16 +57,17 @@ function App() {
 				<Route path="/event" element={<ProtectedRoute isLoggedIn={isLoggedIn}><Calender /></ProtectedRoute>} />
 				<Route path="*" element={<Page404 />} />
 			</Routes>
-			{location.pathname !== '/login' && location.pathname!=='/register' && location.pathname!=='/event' && <Footer/>}
+			{location.pathname !== '/login' && location.pathname!=='/register' && location.pathname!=='/event' && location.pathname!== '/admin' && <Footer/>}
 		</div>
 	);
 }
 
 const ProtectedRoute = ({ isLoggedIn, children }) => {
-	if (!isLoggedIn) {
+	if (!isLoggedIn && !cookie.load('jwt')) {
 	  return <Navigate to="/login" replace />;
 	}
 	return children;
   };
+
 
 export default App;

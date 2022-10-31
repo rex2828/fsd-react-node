@@ -6,8 +6,25 @@ import InfoCard from "../components/Admin/InfoCard";
 import styles from "../css/Admin.module.css";
 
 import logo from "../img/logo.png";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Admin() {
+
+  const [doctors, setDoctors] = useState([])
+
+  const fetchDoctors = async () => {
+    const res = await fetch('http://localhost:3000/api/doctors/getdoctors', {
+      credentials: 'include'
+    })
+    const doctors = await res.json()
+    console.log(doctors.length)
+    setDoctors(doctors)
+  }
+
+  useEffect(()=> {
+    fetchDoctors()
+  }, [])
 
   function submitHandler(event) {
     event.preventDefault();
@@ -34,11 +51,16 @@ function Admin() {
         </section>
         <div id="patients">
           <div className={`${styles["card-heading"]}`}>
-            <h1>Users</h1>
+            <h1>Doctors</h1>
           </div>
           <section id="patientContainer" className={`${styles["grid"]}`}>
-            <InfoCard className={styles} />
-            <InfoCard className={styles} />
+            {/* <InfoCard className={styles} />
+            <InfoCard className={styles} /> */}
+            {
+              doctors.map((doctor) => {
+                return <InfoCard className={styles} doctor={doctor}/>
+              })
+            }
           </section>
         </div>
         <div id="doctors" className={`${styles[""]}`}>
@@ -61,8 +83,8 @@ function Admin() {
               <h1>Approve Doctors</h1>
             </div>
             <section id="unApprovedDoctorContainer" className={`${styles["grid"]}`}>
-              <InfoCard className={styles} />
-              <InfoCard className={styles} />
+              {/* <InfoCard className={styles} />
+              <InfoCard className={styles} /> */}
             </section>
           </div>
           <div id="removeDoctorsContainer" className={`${styles["hide"]}`}>
@@ -70,8 +92,8 @@ function Admin() {
               <h1>Remove Doctor</h1>
             </div>
             <section className={`${styles["grid"]}`} id="deleteDoctorContainer">
-              <InfoCard className={styles} />
-              <InfoCard className={styles} />
+              {/* <InfoCard className={styles} />
+              <InfoCard className={styles} /> */}
             </section>
           </div>
         </div>

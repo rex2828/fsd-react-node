@@ -1,6 +1,7 @@
 import { CheckmarkSVG, TrashSVG } from "../../svg/svg";
 
 function InfoCard(props) {
+
   return (
     <div className={`${props.className["card"]} ${props.className["doctor"]} ${props.className["active"]}`}>
       <div className={`${props.className["content"]}`}>
@@ -59,7 +60,7 @@ function InfoCard(props) {
       </div>
       <div className={`${props.className["user"]}`}>
         <div className={`${props.className["socials"]}`}>
-          <div className={`${props.className["social"]}`}><i className="zmdi zmdi-linkedin-box"></i></div>
+          <div style={{"fontSize": "20px", "fontStyle": "bold"}}>{props.doctor.name}</div>
           {/* <div className={`${props.className["social"]}`}></div>
           <div className={`${props.className["social"]}`}></div>
           <div className={`${props.className["social"]}`}></div> */}
@@ -67,28 +68,28 @@ function InfoCard(props) {
         <div className={`${props.className["profiles"]}`}>
           <div className={`${props.className["profile"]}`}>
             <span>Rating</span>
-            <p className={`${props.className["doctor-rating"]}`}></p>
+            <p className={`${props.className["doctor-rating"]}`}>{props.doctor.rating}</p>
           </div>
           <div className={`${props.className["profile"]}`}>
             <span>Fee</span>
-            <p className={`${props.className["doctor-fee"]}`}></p>
+            <p className={`${props.className["doctor-fee"]}`}>{props.doctor.fee}</p>
           </div>
           <div className={`${props.className["profile"]}`}>
             <span>Category</span>
-            <p className={`${props.className["doctor-category"]}`}></p>
+            <p className={`${props.className["doctor-category"]}`}>{props.doctor.category}</p>
           </div>
           <div className={`${props.className["profile"]}`}>
             <span>Experience</span>
-            <p className={`${props.className["doctor-exp"]}`}></p>
+            <p className={`${props.className["doctor-exp"]}`}>{props.doctor.experience}</p>
           </div>
-          <div className={`${props.className["profile"]}`}>
+          {/* <div className={`${props.className["profile"]}`}>
             <span>City</span>
-            <p className={`${props.className["doctor-city"]}`}></p>
+            <p className={`${props.className["doctor-city"]}`}>{props.doctor.clinicaddress.split(',')[0]}</p>
           </div>
           <div className={`${props.className["profile"]}`}>
             <span>State</span>
-            <p className={`${props.className["doctor-state"]}`}></p>
-          </div>
+            <p className={`${props.className["doctor-state"]}`}>{props.doctor.clinicaddress.split(',')[1]}</p>
+          </div> */}
         </div>
         <div className={`${props.className["buttons"]}`}>
           <button className={`${props.className["approve"]}`}>
