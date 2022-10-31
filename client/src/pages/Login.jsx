@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+const Login = ({handleLogin}) => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -68,8 +69,10 @@ const Login = () => {
           body: JSON.stringify(loginData)
         });
         const data = await res.json();
-        localStorage.setItem('user', JSON.stringify(data.user))
-        navigate('/')
+        if (data) {
+          handleLogin()
+          navigate('/')
+        }
       }
     } catch (error) {
       notifyError()
@@ -188,9 +191,9 @@ const Login = () => {
                   </button>
                   <p className='small fw-bold mt-2 pt-1 mb-4 mt-3 '>
                     Don't have an account?{" "}
-                    <a href='/Register' className='link-danger'>
+                    <Link to='/register' className='link-danger'>
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </form>

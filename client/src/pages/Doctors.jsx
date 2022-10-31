@@ -3,8 +3,6 @@ import styles from '../css/Doctors.module.css';
 import Doctor from '../components/Doctor';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Headi from "../components/Header";
-import Foote from "../components/Footer";
 
 const Doctors = () => {
 
@@ -43,7 +41,6 @@ const Doctors = () => {
 
     return (
         <>
-            <Headi/>
             <div className={`container ${styles.doctorlistContainer}`}>
                 <div className="row">
                     <div className={`col-lg-12 ${styles.cardMargin}`}>
@@ -119,7 +116,6 @@ const Doctors = () => {
                     </div>
                 </div>
             </div>
-            <Foote/>
         </>
     );
 };

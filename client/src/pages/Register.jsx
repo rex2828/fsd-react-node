@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -387,7 +388,7 @@ const Register = () => {
                   </div>
                   <div className='form-check mb-0'>
                     <label className='form-check-label' htmlFor='terms-check'>
-                      Already have an account? <a href='/login'>Login</a>
+                      Already have an account? <Link to='/login'>Login</Link>
                     </label>
                   </div>
                 </div>

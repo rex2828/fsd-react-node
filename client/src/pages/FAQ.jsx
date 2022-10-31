@@ -1,8 +1,6 @@
 import React from "react";
 import style from "../css/Faq.module.css";
 import "react-bootstrap";
-import Headi from "../components/Header";
-import Footer from "../components/Footer";
 
 function FaqTitle () {
     return (
@@ -204,12 +202,10 @@ function FaqContent () {
 const Faq = () => {
     return (
         <>
-            <Headi/>
             <div className={style.mainContainer}>
                 <FaqTitle />
                 <FaqContent />
             </div>
-            <Footer/>
         </>
     );
 };

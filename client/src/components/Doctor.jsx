@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../css/Doctors.module.css'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Doctor = ({doctor}) => {
 
@@ -20,7 +21,7 @@ const Doctor = ({doctor}) => {
             </td>
             <td>
                 <div className={styles.doctorTableName}>
-                    <a href={`/doctor-profile?id=${doctor._id}`}>{doctor.name}</a>
+                    <Link to={`/doctor-profile?id=${doctor._id}`}>{doctor.name}</Link>
                     <p className="m-0">
                         <span className={`text-muted ${styles.edu}`}>{doctor.edu}</span>
                     </p>

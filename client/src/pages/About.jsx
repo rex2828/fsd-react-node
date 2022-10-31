@@ -1,13 +1,10 @@
 import React from 'react';
 import style from "../css/About.module.css";
 import 'react-bootstrap';
-import Headi from "../components/Header";
-import Footer from '../components/Footer';
 
 const About = () => {
     return (
         <div>
-            <Headi/>
             <section id={style.mainContainer}>
                 <div className={style.cc}>
                     <h1>Our team members</h1>
@@ -95,7 +92,6 @@ const About = () => {
                     </ul>
                 </div>
             </section>
-            <Footer/>
         </div>
     );
 };
