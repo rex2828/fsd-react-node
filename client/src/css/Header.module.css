@@ -1,0 +1,29 @@
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.controllerButtons {
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid rgb(165, 165, 165);
+    margin: 5px 10px;
+    width: 80px;
+    cursor: pointer;
+    color: rgb(165, 165, 165);
+    font-size: 20px;
+    background-color: white;
+
+}
+
+.currentWeek {
+    font-size: 20px;
+    margin-top: 5px;
+    color: rgb(165, 165, 165);
+}
+
+.headerHeading {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 5px 10px;
+}

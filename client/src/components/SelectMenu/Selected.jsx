@@ -6,10 +6,10 @@ const Selected = forwardRef((props, ref) => {
       className={
         props.className["selected"] +
         (props.setSpan !== undefined &&
-        props.required !== undefined &&
-        props.required &&
-        props.setSpan &&
-        props.selectedOption === props.placeholder
+          props.required !== undefined &&
+          props.required &&
+          props.setSpan &&
+          props.selectedOption === props.placeholder
           ? " " + props.className["error"]
           : "")
       }

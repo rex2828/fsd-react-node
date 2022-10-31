@@ -1,0 +1,13 @@
+.dayBlock {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.currentDay {
+    background-color: aquamarine;
+    border-radius: 20px;
+}

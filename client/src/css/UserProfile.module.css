@@ -1,13 +1,15 @@
-body
+ /* body
 {
     margin-top:20px;
     text-align: left;
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
-}
-.main-body
+} */
+.mainbody
 {
+    font-size: 2em;
     margin-top: 150px;
     padding: 15px;
+    color: red;
 }
 .card
 {
@@ -26,7 +28,7 @@ body
     border-radius: .25rem;
     font-size: 2rem;
 }
-.card-body
+.cardbody
 {
     flex: 1 1 auto;
     min-height: 1px;
@@ -37,7 +39,7 @@ body
     margin-left: 20px;
     display:inline-block;
 }
-/* #edit
+#edit
 {
     color: blue;
     text-align: left;
@@ -45,8 +47,8 @@ body
     padding-right: 15px;
     padding-left: 15px;
     margin-right: 10px;
-} */
-#editProfile
+}
+.editProfile
 {
     background-color: #0f59ee;
     padding: 16px 30px;
@@ -62,7 +64,7 @@ body
     border-radius: 10px;
     word-spacing: 3px;
 }
-#saveProfile
+.saveProfile
 {
     background-color: #0f59ee;
     padding: 16px 30px;

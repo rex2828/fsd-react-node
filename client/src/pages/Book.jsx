@@ -5,6 +5,8 @@ import Button from "../components/Book/Button";
 import styles from "../css/Book.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Headi from "../components/Header"
+import Foote from "../components/Footer";
 
 
 
@@ -207,8 +209,7 @@ function Book() {
     },
     {
       tm_dd: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).getDate(),
-      tm_mm:
-        new Date(new Date().getTime() + 24 * 60 * 60 * 1000).getMonth() + 1,
+      tm_mm: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).getMonth() + 1,
       tm_yy: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).getFullYear(),
     },
   ]);
@@ -334,22 +335,22 @@ function Book() {
   const [searchParams] = useSearchParams();
 
   const fetchDoctor = useCallback(async () => {
-    const res = await fetch(`http://localhost:3000/api/doctors/doctor/${searchParams.get("doctor")}`)
-    const doctorDetails = await res.json()
+    const res = await fetch(`http://localhost:3000/api/doctors/doctor/${searchParams.get("doctor")}`);
+    const doctorDetails = await res.json();
     const obj = {
       doctorName: doctorDetails.name,
       doctorSpecialization: doctorDetails.category,
       appointmentLocState: doctorDetails.clinicaddress.split(',')[1],
       appointmentLocCity: doctorDetails.clinicaddress.split(',')[0],
-    }
+    };
     setDocInfoValues((prevState) => {
-      return {...prevState, ...obj}
-    })
-  }, [searchParams])
+      return { ...prevState, ...obj };
+    });
+  }, [searchParams]);
 
-  useEffect(()=> {
-    fetchDoctor()
-  }, [fetchDoctor])
+  useEffect(() => {
+    fetchDoctor();
+  }, [fetchDoctor]);
 
 
   async function submitHandler(event) {
@@ -391,18 +392,18 @@ function Book() {
         age: patientInfoValues.patientAge,
         appointmentDate: patientInfoValues.appointmentDate,
         appointmentTime: patientInfoValues.appointmentTime,
-    }
+      };
       const res = await fetch(`http://localhost:3000/api/bookappointment?id=${searchParams.get("doctor")}`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(obj)
-      })
-      const appointment = await res.json()
+      });
+      const appointment = await res.json();
       if (appointment.status === 'ok') {
-        notifySuccess()
+        notifySuccess();
       } else {
-        notifyError()
+        notifyError();
       }
     } else {
       const newPatientInfoInputs = patientInfoInputs.map((input) => {
@@ -415,8 +416,8 @@ function Book() {
     }
   }
 
-	const notifySuccess = () => toast.success("Appointment booked!");
-	const notifyError = () => toast.error("Something went wrong!");
+  const notifySuccess = () => toast.success("Appointment booked!");
+  const notifyError = () => toast.error("Something went wrong!");
 
   function onBlur(event) {
     if (event.target.id === "patientDOB") {
@@ -466,14 +467,14 @@ function Book() {
   }
 
   function onChange(event) {
-    setPatientInfoValues((prevState) => {
-      return { ...prevState, [event.target.name]: event.target.value };
-    });
-    if (event.target.name === "patientState") {
+    if (event.target.name === "patientState" && event.target.value !== patientInfoValues.patientState) {
       setPatientInfoValues((prevState) => {
         return { ...prevState, patientCity: "" };
       });
     }
+    setPatientInfoValues((prevState) => {
+      return { ...prevState, [event.target.name]: event.target.value };
+    });
     if (event.target.id === "patientDOB") {
       const age = getAge(new Date(event.target.value));
       if (
@@ -531,9 +532,9 @@ function Book() {
       } else {
         const res = await fetch('http://localhost:3000/api/users/me', {
           credentials: 'include'
-        })
-        const userData = await res.json()
-        console.log(userData)
+        });
+        const userData = await res.json();
+        console.log(userData);
         setPatientInfoValues({
           patientFirstName: userData.name.split(' ')[0],
           patientLastName: userData.name.split(' ')[1],
@@ -544,7 +545,7 @@ function Book() {
           patientState: "",
           patientCity: "",
           appointmentReason: "",
-        })
+        });
       }
     }
 
@@ -597,76 +598,80 @@ function Book() {
   }
 
   return (
-    <div className={styles["book-appointment"]}>
-      <div className={styles["appointment-form"]}>
-        <h1 className={styles["title"]}>Appointment Form</h1>
-        <form onSubmit={submitHandler} className={styles["form"]}>
-          <div className={styles["info"]}>
-            <div
-              className={
-                styles["patient-info"] +
-                (buttons[0].value === "Auto Fill" && buttons[1].value === "Next"
-                  ? " " + styles["active"]
-                  : "")
-              }
-            >
-              <h2 className={styles["title"]}>
-                <u>Patient's Info</u>
-              </h2>
-              <div className={styles["patient-inputs"]}>
-                <InputMap
-                  className={styles}
-                  inputs={patientInfoInputs}
-                  values={patientInfoValues}
-                  onBlur={onBlur}
-                  onFocus={onFocus}
-                  onInput={onInput}
-                  onClickMenu={onClickMenu}
-                  onChange={onChange}
-                />
+    <>
+      <Headi />
+      <div className={styles["book-appointment"]}>
+        <div className={styles["appointment-form"]}>
+          <h1 className={styles["title"]}>Appointment Form</h1>
+          <form onSubmit={submitHandler} className={styles["form"]}>
+            <div className={styles["info"]}>
+              <div
+                className={
+                  styles["patient-info"] +
+                  (buttons[0].value === "Auto Fill" && buttons[1].value === "Next"
+                    ? " " + styles["active"]
+                    : "")
+                }
+              >
+                <h2 className={styles["title"]}>
+                  <u>Patient's Info</u>
+                </h2>
+                <div className={styles["patient-inputs"]}>
+                  <InputMap
+                    className={styles}
+                    inputs={patientInfoInputs}
+                    values={patientInfoValues}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
+                    onInput={onInput}
+                    onClickMenu={onClickMenu}
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+              <div
+                className={
+                  styles["doctor-info"] +
+                  (buttons[0].value === "Back" && buttons[1].value === "Submit"
+                    ? " " + styles["active"]
+                    : "")
+                }
+              >
+                <h2 className={styles["title"]}>
+                  <u>Doctors's Info</u>
+                </h2>
+                <div className={styles["doctor-inputs"]}>
+                  <InputMap
+                    className={styles}
+                    inputs={docInfoInputs}
+                    values={docInfoValues}
+                    onBlur={onBlur}
+                    onFocus={onFocus}
+                    onInput={onInput}
+                    onClick={onClickMenu}
+                    onChange={onChange}
+                  />
+                </div>
               </div>
             </div>
-            <div
-              className={
-                styles["doctor-info"] +
-                (buttons[0].value === "Back" && buttons[1].value === "Submit"
-                  ? " " + styles["active"]
-                  : "")
-              }
-            >
-              <h2 className={styles["title"]}>
-                <u>Doctors's Info</u>
-              </h2>
-              <div className={styles["doctor-inputs"]}>
-                <InputMap
-                  className={styles}
-                  inputs={docInfoInputs}
-                  values={docInfoValues}
-                  onBlur={onBlur}
-                  onFocus={onFocus}
-                  onInput={onInput}
-                  onClick={onClickMenu}
-                  onChange={onChange}
-                />
-              </div>
+            <div className={styles["buttons"]}>
+              {buttons.map((button) => {
+                return (
+                  <Button
+                    key={button.id}
+                    className={styles["button"]}
+                    {...button}
+                    onClick={onClickButton}
+                  />
+                );
+              })}
             </div>
-          </div>
-          <div className={styles["buttons"]}>
-            {buttons.map((button) => {
-              return (
-                <Button
-                  key={button.id}
-                  className={styles["button"]}
-                  {...button}
-                  onClick={onClickButton}
-                />
-              );
-            })}
-          </div>
-        </form>
+          </form>
+        </div>
+        <ToastContainer />
       </div>
-			<ToastContainer />
-    </div>
+      <Foote />
+    </>
   );
 }
 

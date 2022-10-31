@@ -17,7 +17,8 @@
 .appointment-form {
   width: 100%;
   max-width: 640px;
-  margin: 20px auto;
+  margin: 40px auto;
+  margin-top: 100px;
   min-height: 700px;
   max-height: fit-content;
   padding: 25px 30px;

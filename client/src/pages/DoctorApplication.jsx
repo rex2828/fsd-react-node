@@ -1,8 +1,9 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Headi from "../components/Header";
+import Foote from "../components/Footer";
 
 const DoctorApplication = () => {
   const [doctorData, setDoctorData] = useState({
@@ -22,8 +23,8 @@ const DoctorApplication = () => {
   });
 
 
-	const notifySuccess = () => toast.success("Application sent!");
-	const notifyError = () => toast.error("Something went wrong!");
+  const notifySuccess = () => toast.success("Application sent!");
+  const notifyError = () => toast.error("Something went wrong!");
 
   const handleClick = async (event) => {
     event.preventDefault();
@@ -38,33 +39,37 @@ const DoctorApplication = () => {
         email: doctorData.email,
         mobile: doctorData.phone,
         clinicaddress: doctorData.address,
-      }
+      };
       const res = await fetch("http://localhost:3000/api/doctors/register", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify(data)
-      })
-      const doctorRegister = await res.json()
-      console.log(doctorRegister)
+      });
+      const doctorRegister = await res.json();
+      console.log(doctorRegister);
       if (doctorRegister) {
-        notifySuccess()
+        notifySuccess();
       }
     } catch (error) {
-			notifyError()
+      notifyError();
     }
   };
 
   return (
     <>
-      <section className='vh-100'>
+      <Headi/>
+      <section className='mb-5'>
         <div className='container-fluid h-custom'>
           <div className='row d-flex justify-content-center align-items-center h-100'>
             <div className='col-md-9 col-lg-6 col-xl-5'>
+            <p className='text-center h1 fw-bold mx-1 mx-md-3 mt-4 '>
+                  Apply Here
+                </p>
               <img
                 src='https://img.freepik.com/free-vector/flat-psychiatrist-elderly-patient-with-alzheimer-diseas-dementia-psychiatric-anxiety-disorder-doctor-help-old-man-with-confusion-head-treatment-mental-problems-loss-memory_88138-768.jpg?w=826'
                 className='img-fluid rounded mx-auto d-block mt-1 mb-2'
-                alt='Sample image'
+                alt='Sample'
               />
             </div>
 
@@ -263,12 +268,12 @@ const DoctorApplication = () => {
                   />
                 </div>
                 <div className='d-flex justify-content-between align-items-center flex-column'>
-                  <div className='text-center text-lg-start mt-4 pt-2'>
+                  <div className='text-center text-lg-start'>
                     <button
                       type='Submit'
                       className='btn btn-warning btn-lg'
                       id='doctor-add-btn'
-                      //   style='padding-left: 2.5rem; padding-right: 2.5rem;'
+                    //   style='padding-left: 2.5rem; padding-right: 2.5rem;'
                     >
                       Apply
                     </button>
@@ -279,7 +284,8 @@ const DoctorApplication = () => {
           </div>
         </div>
       </section>
-			<ToastContainer />
+      <ToastContainer />
+      <Foote/>
     </>
   );
 };

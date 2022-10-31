@@ -19,11 +19,11 @@ function SelectMenu(props) {
   let newOptions;
 
   useEffect(() => {
-    if (props.isOptionsUpdated !== undefined) {
-      if (props.isOptionsUpdated) {
-        setSelectedOption(props.placeholder);
-        props.optionsUpdated();
-      }
+    if (props.value !== "") {
+      setSelectedOption(props.value);
+    }
+    else if (selectedOption !== props.placeholder && props.value === "") {
+      setSelectedOption(props.placeholder)
     }
 
     function closeMenu(event) {
@@ -116,10 +116,10 @@ function SelectMenu(props) {
         )}
       </div>
       {props.errorMessage !== undefined &&
-      props.required === true &&
-      props.setSpan === true &&
-      !isActiveOptions &&
-      selectedOption === props.placeholder ? (
+        props.required === true &&
+        props.setSpan === true &&
+        !isActiveOptions &&
+        selectedOption === props.placeholder ? (
         <span className={props.className["errorMessage"]}>
           {props.errorMessage}
         </span>
