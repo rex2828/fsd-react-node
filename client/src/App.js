@@ -11,17 +11,14 @@ import FAQ from "./pages/FAQ";
 import Page404 from "./pages/Page404";
 import Book from "./pages/Book";
 import Contact from "./pages/Contact";
-import Headi from "./components/Header";
-import Foote from "./components/Footer";
 import Doctor from "./pages/Doctors";
 import DoctorApplication from "./pages/DoctorApplication";
+import Calender from "./pages/Calender"
 import React from "react";
 
 function App() {
 	return (
 		<div className="App">
-			{/* {window.location.pathname !== "/book" ? <Headi /> : null} */}
-			<Headi />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/login" element={<Login />} />
@@ -36,9 +33,9 @@ function App() {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/help" element={<Help />} />
 				<Route path="/faq" element={<FAQ />} />
+				<Route path="/event" element={<Calender />} />
 				<Route path="*" element={<Page404 />} />
 			</Routes>
-			{window.location.pathname !== "/book" ? <Foote /> : null}
 		</div>
 	);
 }

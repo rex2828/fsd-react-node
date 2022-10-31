@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Headi from "../components/Header";
+import Foote from "../components/Footer";
 
 const DoctorApplication = () => {
   const [doctorData, setDoctorData] = useState({
@@ -56,10 +58,14 @@ const DoctorApplication = () => {
 
   return (
     <>
+      <Headi/>
       <section className='mb-5'>
         <div className='container-fluid h-custom'>
           <div className='row d-flex justify-content-center align-items-center h-100'>
             <div className='col-md-9 col-lg-6 col-xl-5'>
+            <p className='text-center h1 fw-bold mx-1 mx-md-3 mt-4 '>
+                  Apply Here
+                </p>
               <img
                 src='https://img.freepik.com/free-vector/flat-psychiatrist-elderly-patient-with-alzheimer-diseas-dementia-psychiatric-anxiety-disorder-doctor-help-old-man-with-confusion-head-treatment-mental-problems-loss-memory_88138-768.jpg?w=826'
                 className='img-fluid rounded mx-auto d-block mt-1 mb-2'
@@ -279,6 +285,7 @@ const DoctorApplication = () => {
         </div>
       </section>
       <ToastContainer />
+      <Foote/>
     </>
   );
 };

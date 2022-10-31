@@ -5,6 +5,8 @@ import Button from "../components/Book/Button";
 import styles from "../css/Book.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Headi from "../components/Header"
+import Foote from "../components/Footer";
 
 
 
@@ -597,6 +599,8 @@ function Book () {
   }
 
   return (
+    <>
+    <Headi/>
     <div className={styles["book-appointment"]} style={{ paddingTop: "7rem" }}>
       <div className={styles["appointment-form"]}>
         <h1 className={styles["title"]}>Appointment Form</h1>
@@ -667,6 +671,8 @@ function Book () {
       </div>
       <ToastContainer />
     </div>
+    <Foote/>
+    </>
   );
 }
 
