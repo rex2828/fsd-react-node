@@ -5,8 +5,6 @@ import Button from "../components/Book/Button";
 import styles from "../css/Book.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Headi from "../components/Header"
-import Foote from "../components/Footer";
 
 
 
@@ -355,10 +353,10 @@ function Book() {
 
   async function submitHandler(event) {
     event.preventDefault();
-    const values = {};
+    // const values = {};
     let isEmpty = false;
     for (const [key, value] of Object.entries(patientInfoValues)) {
-      values[key] = value.toString().trim();
+      // values[key] = value.toString().trim();
       setPatientInfoValues((prevState) => {
         return { ...prevState, [key]: value.toString().trim() };
       });
@@ -373,7 +371,7 @@ function Book() {
       }
     }
     for (const [key, value] of Object.entries(docInfoValues)) {
-      values[key] = value.toString().trim();
+      // values[key] = value.toString().trim();
       setDocInfoValues((prevState) => {
         return { ...prevState, [key]: value.toString().trim() };
       });
@@ -535,17 +533,33 @@ function Book() {
         });
         const userData = await res.json();
         console.log(userData);
-        setPatientInfoValues({
-          patientFirstName: userData.name.split(' ')[0],
-          patientLastName: userData.name.split(' ')[1],
-          patientMobileNo: "",
-          patientDOB: "",
-          patientAge: "",
-          patientEmail: userData.email,
-          patientState: "",
-          patientCity: "",
-          appointmentReason: "",
-        });
+        // setPatientInfoValues({
+        //   patientFirstName: userData.name.split(' ')[0],
+        //   patientLastName: userData.name.split(' ')[1],
+        //   patientMobileNo: "",
+        //   patientDOB: "",
+        //   patientAge: "",
+        //   patientEmail: userData.email,
+        //   patientSex: "",
+        //   patientState: "",
+        //   patientCity: "",
+        //   appointmentReason: "",
+        // });
+        setPatientInfoValues((prevState) => {
+          return {
+            ...prevState,
+            patientFirstName: userData.name.split(' ')[0],
+            patientLastName: userData.name.split(' ')[1],
+            patientMobileNo: "",
+            patientDOB: "",
+            patientAge: "",
+            patientEmail: userData.email,
+            patientSex: "",
+            patientState: "",
+            patientCity: "",
+            appointmentReason: "",
+          };
+        })
       }
     }
 
@@ -599,7 +613,6 @@ function Book() {
 
   return (
     <>
-      <Headi />
       <div className={styles["book-appointment"]}>
         <div className={styles["appointment-form"]}>
           <h1 className={styles["title"]}>Appointment Form</h1>
@@ -670,7 +683,6 @@ function Book() {
         </div>
         <ToastContainer />
       </div>
-      <Foote />
     </>
   );
 }

@@ -4,8 +4,6 @@ import imgSrc from '../img/contactSvg.svg';
 import { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Headi from "../components/Header";
-import Footer from "../components/Footer";
 
 
 function Contact () {
@@ -51,7 +49,6 @@ function Contact () {
 
 	return (
 		<>
-			<Headi/>
 			<div className="contact3 py-5" style={{ marginTop: "5rem" }}>
 				<div className="row no-gutters">
 					<div className="container">
@@ -131,7 +128,6 @@ function Contact () {
 					</div>
 				</div>
 			</div>
-			<Footer/>
 		</>
 	);
 }

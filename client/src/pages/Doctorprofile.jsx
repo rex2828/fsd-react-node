@@ -4,8 +4,6 @@ import { useState, useCallback } from 'react';
 import { useSearchParams } from "react-router-dom";
 import style from "../css/DoctorProfile.css";
 import unknownimg from "../img/unknown.png";
-import Headi from "../components/Header"
-import Foote from "../components/Footer";
 
 const Doctorprofile = () => {
 
@@ -51,8 +49,6 @@ const Doctorprofile = () => {
 
     return (
         <>
-        <Headi/>
-
         <div className={`${style.doctorprofilecontainer} container`} style={{ marginTop: '100px' }}>
             <div className={`row justify-content-center`}>
                 <div className={`col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn`}>
@@ -108,7 +104,6 @@ const Doctorprofile = () => {
                 </div>
             </div>
         </div>
-        <Foote/>
         </>
 
     );

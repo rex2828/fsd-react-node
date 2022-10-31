@@ -5,8 +5,6 @@ import 'react-bootstrap';
 import Appointment from '../components/Appointment';
 import style from '../css/UserProfile.module.css';
 import unknwonimg from '../img/unknown.png'
-import Headi from "../components/Header";
-import Foote from "../components/Footer";
 
 const Userprofile = () => {
 
@@ -50,7 +48,6 @@ const Userprofile = () => {
 
 	return (
         <>
-        <Headi/>
 		<div className="container" style={{paddingTop:'100px'}}>
             <div className={`${style.mainbody}main-body`} style={{fontSize:'1rem'}}>
                 <div className="row gutters-sm">
@@ -149,7 +146,6 @@ const Userprofile = () => {
                 </div>
             </div>
         </div>
-        <Foote/>
         </>
 	)
 }

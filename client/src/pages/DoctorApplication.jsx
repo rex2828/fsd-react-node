@@ -2,8 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Headi from "../components/Header";
-import Foote from "../components/Footer";
 
 const DoctorApplication = () => {
   const [doctorData, setDoctorData] = useState({
@@ -58,7 +56,6 @@ const DoctorApplication = () => {
 
   return (
     <>
-      <Headi/>
       <section className='mb-5'>
         <div className='container-fluid h-custom'>
           <div className='row d-flex justify-content-center align-items-center h-100'>
@@ -285,7 +282,6 @@ const DoctorApplication = () => {
         </div>
       </section>
       <ToastContainer />
-      <Foote/>
     </>
   );
 };

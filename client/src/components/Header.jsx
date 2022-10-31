@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Header () {
+export default function Header ({isLoggedIn, handleLogout }) {
+
+    const logoutHandler = () => {
+        handleLogout()
+    }
+
     return (
         <header className="main_menu home_menu menu_fixed">
 
@@ -40,11 +45,14 @@ export default function Header () {
                                         <Link className="nav-link" to="/contact">Contact</Link>
                                     </li>
                                     <li>
-                                        <Link className="btn_2 d-lg-block ms-auto mt-3 mx-2" id="login-register-btn"
-                                            to="/login">Login/Register</Link>
+                                        {!isLoggedIn && <Link className="btn_2 d-lg-block ms-auto mt-3 mx-2" id="login-register-btn"
+                                            to="/login">Login/Register</Link>}
                                     </li>
                                     <li>
-                                        <Link className="btn_2 d-lg-block ms-auto mt-3" id="logout-btn" to="/login">Logout</Link>
+                                        {isLoggedIn && <Link className="btn_2 d-lg-block ms-auto mt-3 mx-2" to="/user-profile">Profile</Link>}
+                                    </li>
+                                    <li>
+                                        {isLoggedIn && <Link className="btn_2 d-lg-block ms-auto mt-3" id="logout-btn" to="/login" onClick={logoutHandler}>Logout</Link>}
                                     </li>
                                 </ul>
                             </div>

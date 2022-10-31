@@ -112,7 +112,7 @@ const authUser = asyncHandler(async (req, res) => {
 
 const logout = asyncHandler(async (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 })
-    res.redirect('/');
+    res.status(200).json({message: 'logged out'})
 })
 
 const getUserdata = asyncHandler(async (req, res) => {
