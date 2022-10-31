@@ -377,8 +377,6 @@ function Book() {
     //   });
     // }
     if (!isEmpty) {
-      console.log(patientInfoValues)
-      console.log(docInfoValues)
       // here
       const obj = {
         name: patientInfoValues.patientFirstName + ' ' + patientInfoValues.patientLastName,
@@ -393,6 +391,7 @@ function Book() {
         appointmentDate: docInfoValues.appointmentDate,
         appointmentTime: docInfoValues.appointmentTime,
       };
+      console.log(obj)
       const res = await fetch(`http://localhost:3000/api/bookappointment?id=${searchParams.get("doctor")}`, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
@@ -534,7 +533,6 @@ function Book() {
           credentials: 'include'
         });
         const userData = await res.json();
-        console.log(userData);
         setPatientInfoValues((prevState) => {
           return {
             ...prevState,
