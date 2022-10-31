@@ -370,15 +370,15 @@ function Book() {
         isEmpty = true;
       }
     }
-    for (const [key, value] of Object.entries(docInfoValues)) {
-      // values[key] = value.toString().trim();
-      setDocInfoValues((prevState) => {
-        return { ...prevState, [key]: value.toString().trim() };
-      });
-    }
+    // for (const [key, value] of Object.entries(docInfoValues)) {
+    //   // values[key] = value.toString().trim();
+    //   setDocInfoValues((prevState) => {
+    //     return { ...prevState, [key]: value.toString().trim() };
+    //   });
+    // }
     if (!isEmpty) {
       console.log(patientInfoValues)
-      console.log("Hello")
+      console.log(docInfoValues)
       // here
       const obj = {
         name: patientInfoValues.patientFirstName + ' ' + patientInfoValues.patientLastName,
@@ -596,78 +596,76 @@ function Book() {
   }
 
   return (
-    <>
-      <div className={styles["book-appointment"]}>
-        <div className={styles["appointment-form"]}>
-          <h1 className={styles["title"]}>Appointment Form</h1>
-          <form onSubmit={submitHandler} className={styles["form"]}>
-            <div className={styles["info"]}>
-              <div
-                className={
-                  styles["patient-info"] +
-                  (buttons[0].value === "Auto Fill" && buttons[1].value === "Next"
-                    ? " " + styles["active"]
-                    : "")
-                }
-              >
-                <h2 className={styles["title"]}>
-                  <u>Patient's Info</u>
-                </h2>
-                <div className={styles["patient-inputs"]}>
-                  <InputMap
-                    className={styles}
-                    inputs={patientInfoInputs}
-                    values={patientInfoValues}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                    onInput={onInput}
-                    onClickMenu={onClickMenu}
-                    onChange={onChange}
-                  />
-                </div>
-              </div>
-              <div
-                className={
-                  styles["doctor-info"] +
-                  (buttons[0].value === "Back" && buttons[1].value === "Submit"
-                    ? " " + styles["active"]
-                    : "")
-                }
-              >
-                <h2 className={styles["title"]}>
-                  <u>Doctors's Info</u>
-                </h2>
-                <div className={styles["doctor-inputs"]}>
-                  <InputMap
-                    className={styles}
-                    inputs={docInfoInputs}
-                    values={docInfoValues}
-                    onBlur={onBlur}
-                    onFocus={onFocus}
-                    onInput={onInput}
-                    onClick={onClickMenu}
-                    onChange={onChange}
-                  />
-                </div>
+    <div className={styles["book-appointment"]}>
+      <div className={styles["appointment-form"]}>
+        <h1 className={styles["title"]}>Appointment Form</h1>
+        <form onSubmit={submitHandler} className={styles["form"]}>
+          <div className={styles["info"]}>
+            <div
+              className={
+                styles["patient-info"] +
+                (buttons[0].value === "Auto Fill" && buttons[1].value === "Next"
+                  ? " " + styles["active"]
+                  : "")
+              }
+            >
+              <h2 className={styles["title"]}>
+                <u>Patient's Info</u>
+              </h2>
+              <div className={styles["patient-inputs"]}>
+                <InputMap
+                  className={styles}
+                  inputs={patientInfoInputs}
+                  values={patientInfoValues}
+                  onBlur={onBlur}
+                  onFocus={onFocus}
+                  onInput={onInput}
+                  onClickMenu={onClickMenu}
+                  onChange={onChange}
+                />
               </div>
             </div>
-            <div className={styles["buttons"]}>
-              {buttons.map((button) => {
-                return (
-                  <Button
-                    key={button.id}
-                    className={styles["button"]}
-                    {...button}
-                    onClick={onClickButton}
-                  />
-                );
-              })}
+            <div
+              className={
+                styles["doctor-info"] +
+                (buttons[0].value === "Back" && buttons[1].value === "Submit"
+                  ? " " + styles["active"]
+                  : "")
+              }
+            >
+              <h2 className={styles["title"]}>
+                <u>Doctors's Info</u>
+              </h2>
+              <div className={styles["doctor-inputs"]}>
+                <InputMap
+                  className={styles}
+                  inputs={docInfoInputs}
+                  values={docInfoValues}
+                  onBlur={onBlur}
+                  onFocus={onFocus}
+                  onInput={onInput}
+                  onClick={onClickMenu}
+                  onChange={onChange}
+                />
+              </div>
             </div>
-          </form>
-        </div>
-        <ToastContainer />
+          </div>
+          <div className={styles["buttons"]}>
+            {buttons.map((button) => {
+              return (
+                <Button
+                  key={button.id}
+                  className={styles["button"]}
+                  {...button}
+                  onClick={onClickButton}
+                />
+              );
+            })}
+          </div>
+        </form>
       </div>
-    </>
+      <ToastContainer />
+    </div>
   );
 }
 
