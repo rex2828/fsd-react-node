@@ -229,23 +229,23 @@ function Book() {
     }
 
     if (
-      dateTime[0].tday_dd !== new Date().getDate() ||
+      +dateTime[0].tday_dd !== new Date().getDate() ||
       dateTime[0].tday_dd.toString().length !== 2 ||
       dateTime[0].tday_mm.toString().length !== 2 ||
       dateTime[1].tm_dd.toString().length !== 2 ||
       dateTime[1].tm_mm.toString().length !== 2
     ) {
       const newDateTime = dateTime.map((dT) => {
-        if (dT.tday_dd < 10 && dT.tday_dd.toString().length !== 2) {
+        if (+dT.tday_dd < 10 && dT.tday_dd.toString().length !== 2) {
           return { ...dT, tday_dd: "0" + dT.tday_dd.toString() };
         }
-        if (dT.tday_mm < 10 && dT.tday_mm.toString().length !== 2) {
+        if (+dT.tday_mm < 10 && dT.tday_mm.toString().length !== 2) {
           return { ...dT, tday_mm: "0" + dT.tday_mm.toString() };
         }
-        if (dT.tm_dd < 10 && dT.tm_dd.toString().length !== 2) {
+        if (+dT.tm_dd < 10 && dT.tm_dd.toString().length !== 2) {
           return { ...dT, tm_dd: "0" + dT.tm_dd.toString() };
         }
-        if (dT.tm_mm < 10 && dT.tm_mm.toString().length !== 2) {
+        if (+dT.tm_mm < 10 && dT.tm_mm.toString().length !== 2) {
           return { ...dT, tm_mm: "0" + dT.tm_mm.toString() };
         }
         return dT;
@@ -353,10 +353,8 @@ function Book() {
 
   async function submitHandler(event) {
     event.preventDefault();
-    // const values = {};
     let isEmpty = false;
     for (const [key, value] of Object.entries(patientInfoValues)) {
-      // values[key] = value.toString().trim();
       setPatientInfoValues((prevState) => {
         return { ...prevState, [key]: value.toString().trim() };
       });
@@ -370,12 +368,7 @@ function Book() {
         isEmpty = true;
       }
     }
-    // for (const [key, value] of Object.entries(docInfoValues)) {
-    //   // values[key] = value.toString().trim();
-    //   setDocInfoValues((prevState) => {
-    //     return { ...prevState, [key]: value.toString().trim() };
-    //   });
-    // }
+
     if (!isEmpty) {
       // here
       const obj = {
